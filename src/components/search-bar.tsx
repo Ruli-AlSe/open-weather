@@ -5,11 +5,18 @@ import { useEffect, useState } from 'react';
 import { debounce } from '@/lib/utils';
 import { searchCityLocation } from '@/actions/search-city-location';
 import { City } from '@/lib/definitions';
+import { useCityStore } from '@/stores/use-city-store';
 
 export const SearchBar = () => {
   const [location, setLocation] = useState<string>('');
   const [cities, setCities] = useState<City[] | undefined>();
+  const setActiveCity = useCityStore((state) => state.setActiveCity);
   const processChange = debounce((value: string) => setLocation(value));
+
+  const selectActiveCity = (city: City) => {
+    setActiveCity(city);
+    setLocation('');
+  };
 
   useEffect(() => {
     const getCities = async () => {
@@ -25,27 +32,32 @@ export const SearchBar = () => {
   }, [location]);
 
   return (
-    <div className="w-full px-3 max-w-4xl mt-10 flex justify-center gap-3">
-      <div className="w-full relative">
+    <section id="search-bar-section" className="md:px-3 mt-10 flex justify-center gap-3">
+      <div className="w-full relative py-3">
+        <h2 className="text-2xl mb-3">Search for any city in the world and click on it </h2>
         <input
-          className="w-full p-1 md:p-3 text-xl rounded-xl text-black"
+          className="w-full p-1 md:p-3 text-xl md:rounded-lg text-black"
           type="text"
           placeholder="Enter location"
           onChange={(e) => processChange(e.target.value)}
         />
+        {cities?.length === 0 && (
+          <p className="p-4 text-red-500">No results found for &quot; {location} &quot;</p>
+        )}
         {cities && (
-          <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white rounded-lg shadow-md top-16">
-            {cities.map((city) => (
-              <div
-                key={city.lat + city.lon}
+          <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-full">
+            {cities.map((city, idx) => (
+              <p
+                key={`${city.lat} - ${city.lon} - ${idx}`}
                 className="cursor-pointer text-black hover:bg-gray-100 px-4 py-2"
+                onClick={() => selectActiveCity(city)}
               >
                 {city.name}, {city.state}, {city.country}
-              </div>
+              </p>
             ))}
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
