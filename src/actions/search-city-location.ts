@@ -11,7 +11,7 @@ export const searchCityLocation = async (query: string) => {
       throw new Error('API URL or API key is missing');
     }
 
-    const response = await fetch(`${apiUrl}/direct?q=${query}&limit=10&appid=${apiKey}`);
+    const response = await fetch(`${apiUrl}/geo/1.0/direct?q=${query}&limit=10&appid=${apiKey}`);
     const data: City[] = await response.json();
 
     return data;
