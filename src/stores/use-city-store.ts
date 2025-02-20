@@ -5,7 +5,7 @@ export const useCityStore = create<CitiesState & CitiesActions>((set) => ({
   activeCity: null,
   favCities: [],
   setActiveCity: (city) => set(() => ({ activeCity: city })),
-  addFavCity: (city) => set((state) => ({ favCities: [...state.favCities, city] })),
+  addFavCities: (cities) => set((state) => ({ favCities: [...state.favCities, ...cities] })),
   removeFavCity: (lat, lon) =>
     set((state) => ({
       favCities: state.favCities.filter((city) => city.lat !== lat && city.lon !== lon),

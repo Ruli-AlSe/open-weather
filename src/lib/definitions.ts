@@ -14,7 +14,7 @@ export interface CitiesState {
 
 export interface CitiesActions {
   setActiveCity: (city: City | null) => void;
-  addFavCity: (city: City) => void;
+  addFavCities: (cities: City[]) => void;
   removeFavCity: (lat: number, lon: number) => void;
 }
 
