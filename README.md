@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Go Bravo - Code challenge
 
-## Getting Started
+## Como correr el proyecto en local
 
-First, run the development server:
+1. Clonar el repositorio.
+2. Instalar dependencias.
+
+- Para el proyecto usé el gestor de dependencias de [`pnpm`](https://pnpm.io/), pero si deseas usar `yarn` o `npm` solo elimina el archivo `pnpm-lock.yaml` y corre el comando correspondiente para instalar las dependencias.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Clonar el archivo `.env.template` y renombrarlo a `.env`, reemplazar las variables de entorno con los valores correspondientes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.template .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Correr el proyecto.
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador y ve el resultado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Sobre el proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Descripción de proyecto
 
-## Deploy on Vercel
+- Consulta de ciudad
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  1. Tener un buscador para consultar cualquier ciudad del mundo.
+  2. Mostrar los resultados de las coincidencias de las ciudades con el texto
+     ingresado en el buscador.
+  3. Tener una opción para poder agregar a favoritos la ciudad deseada.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Consultar el clima de una ciudad 4. Seleccionar una ciudad de la lista de favoritos mostrar el clima. 5. Mostrar el clima actual en grados centígrados, la temperatura mínima y
+  máxima. 6. Mostrar la temperatura por hora para las próximas 24 horas. 7. Mostrar el clima mínimo y máximo por día por el resto de la semana.
+
+### Principal problema
+
+- El servicio de OpenWeatherMap tiene una gran variedad APIs para hacer diferentes consultas respecto al clima pero, la gran mayoría son de paga. Para resolver el punto `7` y punto `8` y obtener el pronostico de temperatura por hora y el pronostico de temperatura max/min para el resto de la semana, la única APi gratuita que proporciona es [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) la cual como su nombre lo dice te da el pronostico de temperaturas para 5 días en lapsos de 3 horas.
+
+#### Solución
+
+- La solución al problema del punto `7` fue obtener el clima de la hora actual y solo 8 (porque 8 datos de cada 3 horas implica pronostico para 24 horas) elementos del pronóstico de 5 días en 3 horas, obtener la cantidad de horas "vacías" entre el primer dato y el siguiente en el array y hacer un promedio con sus temperaturas para "predecir" la posible variación de temperatura para cada hora. La solución del punto `8` es algo similar pero con los datos del pronostico para 5 días y hacer el promedio de temperatura máxima y mínima de cada 3 horas.
+
+### Arquitectura usada
+
+La aplicación fue creada con el framework `Next.js` para hacer peticiones al API usando funciones de servidor y mantener oculta el `API key`, `TypeScript` para tener un tipado estricto de los datos y evitar muchos errores en tiempo de ejecución, `Tailwind` para agregar estilos a los componentes y `Zustand` que es un gestor de estado global ligero y potente para almacenar información acerca de las ciudades favoritas y la ciudad que se consulta el clima.
+
+#### Estructura de carpetas
+
+```bash
+.
+├── public              // todos los assets estáticos
+├── src                 // código fuente
+│   ├── actions         // Funciones de servidor para hacer consultas al API de OpenWeatherMap
+│   ├── app             // Layouts, Paginas y rutas de la aplicación
+│   ├── components      // componentes utilizados en las páginas
+│   │   ├── ui          // Componentes atómicos
+│   │   ├── auth *      // Esta carpeta no existe pero pudieran almacenarse componentes relacionados con la autenticación y seguir este enfoque para cada ruta
+│   │   ├── home *
+│   ├── lib             // Funciones y utilidades
+│   │   ├── definitions // Tipos de datos
+│   ├── stores          // Funciones del gestor de estado global
+│   ├── hooks *         // Propuesta para hooks personalizados
+```
+
+### Trade-offs
+
+Lista de cosas que me gustaría implementar pero no pude debido a tiempo.
+
+- Agregar elementos para accesibilidad en los componentes.
+- Agregar tests unitarios y de integración (Hice mucho testing manual para asegurar el buen funcionamiento, pero es una excelente practica para agregar tests automatizados y evitar el testing manual cuando la aplicación crece).
+- Funcionalidad para obtener información en diferentes sistemas métricos
+- Funcionalidad para hacer una aplicación multi-idioma.
+- Mejoras en el UI para mostrar iconos relacionados al clima (soleado, nublado, tormenta eléctrica, etc).
+- Mejorar efectos y animaciones en CSS.
