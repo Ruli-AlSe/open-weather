@@ -74,7 +74,9 @@ export interface Forecast {
   dt_txt: string;
 }
 
-export interface HourlyTemp {
-  temp: number;
+export interface TempForecast {
+  temp_max?: number;
+  temp_min?: number;
+  temp?: number;
   dt_txt: string;
 }

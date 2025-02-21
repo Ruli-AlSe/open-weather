@@ -1,4 +1,4 @@
-import { Forecast, HourlyTemp } from './definitions';
+import { Forecast, TempForecast } from './definitions';
 
 export const debounce = (callback: (value: string) => void, timeout = 400) => {
   let timer: NodeJS.Timeout;
@@ -12,7 +12,7 @@ export const debounce = (callback: (value: string) => void, timeout = 400) => {
 };
 
 export const convert3hrForecastToHourlyForecast = (forecast: Forecast[]) => {
-  const result: HourlyTemp[] = [];
+  const result: TempForecast[] = [];
 
   for (let i = 0; i < forecast.length; i++) {
     const currentElem = forecast[i];
@@ -61,4 +61,34 @@ export const apiDateFormat = (date: Date) => {
   const hour = utcDate.getHours().toString().padStart(2, '0');
 
   return `${year}-${month}-${day} ${hour}:00:00`;
+};
+
+export const convertToDailyTempForecast = (forecast: Forecast[]) => {
+  const result: TempForecast[] = [];
+
+  let tempMaxAcc = 0;
+  let tempMinAcc = 0;
+  let counter = 0;
+  for (let i = 0; i < forecast.length; i++) {
+    const currentElem = forecast[i];
+    const currentDate = currentElem.dt_txt;
+    tempMaxAcc += currentElem.main.temp_max;
+    tempMinAcc += currentElem.main.temp_min;
+
+    if (forecast[i + 1] && currentDate.split(' ')[0] === forecast[i + 1].dt_txt.split(' ')[0]) {
+      counter++;
+    } else {
+      const formattedDate = new Date(currentDate.split(' ')[0]).toDateString();
+      result.push({
+        temp_max: Number((tempMaxAcc / counter).toFixed(2)),
+        temp_min: Number((tempMinAcc / counter).toFixed(2)),
+        dt_txt: formattedDate,
+      });
+      tempMaxAcc = 0;
+      tempMinAcc = 0;
+      counter = 0;
+    }
+  }
+
+  return result;
 };

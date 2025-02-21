@@ -1,4 +1,5 @@
 import { FavoriteCities, SearchBar, WeatherInfo } from '@/components';
+import { DailyTempForecast } from '@/components/daily-temp-forecast';
 import { HourlyForecast } from '@/components/hourly-forecast';
 
 export default async function Home() {
@@ -18,6 +19,7 @@ export default async function Home() {
       <WeatherInfo />
 
       <HourlyForecast />
+      <DailyTempForecast />
     </main>
   );
 }
