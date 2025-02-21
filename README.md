@@ -40,16 +40,21 @@ favoritas y debe cumplir con los siguientes requerimientos:
      ingresado en el buscador.
   3. Tener una opción para poder agregar a favoritos la ciudad deseada.
 
-- Consultar el clima de una ciudad 4. Seleccionar una ciudad de la lista de favoritos mostrar el clima. 5. Mostrar el clima actual en grados centígrados, la temperatura mínima y
-  máxima. 6. Mostrar la temperatura por hora para las próximas 24 horas. 7. Mostrar el clima mínimo y máximo por día por el resto de la semana.
+- Consultar el clima de una ciudad
+
+  4. Seleccionar una ciudad de la lista de favoritos mostrar el clima.
+  5. Mostrar el clima actual en grados centígrados, la temperatura mínima y
+     máxima.
+  6. Mostrar la temperatura por hora para las próximas 24 horas.
+  7. Mostrar el clima mínimo y máximo por día por el resto de la semana.
 
 ### Principal problema
 
-- El servicio de OpenWeatherMap tiene una gran variedad APIs para hacer diferentes consultas respecto al clima pero, la gran mayoría son de paga. Para resolver el punto `7` y punto `8` y obtener el pronostico de temperatura por hora y el pronostico de temperatura max/min para el resto de la semana, la única APi gratuita que proporciona es [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) la cual como su nombre lo dice te da el pronostico de temperaturas para 5 días en lapsos de 3 horas.
+- El servicio de OpenWeatherMap tiene una gran variedad APIs para hacer diferentes consultas respecto al clima pero, la gran mayoría son de paga. Para resolver el punto `6` y punto `7` y obtener el pronostico de temperatura por hora y el pronostico de temperatura max/min para el resto de la semana, la única APi gratuita que proporciona es [`5 Day / 3 Hour Forecast`](https://openweathermap.org/forecast5) la cual como su nombre lo dice te da el pronostico de temperaturas para 5 días en lapsos de 3 horas.
 
 #### Solución
 
-- La solución al problema del punto `7` fue obtener el clima de la hora actual y solo 8 (porque 8 datos de cada 3 horas implica pronostico para 24 horas) elementos del pronóstico de 5 días en 3 horas, obtener la cantidad de horas "vacías" entre el primer dato y el siguiente en el array y hacer un promedio con sus temperaturas para "predecir" la posible variación de temperatura para cada hora. La solución del punto `8` es algo similar pero con los datos del pronostico para 5 días y hacer el promedio de temperatura máxima y mínima de cada 3 horas.
+- La solución al problema del punto `6` fue obtener el clima de la hora actual y solo 8 (porque 8 datos de cada 3 horas implica pronostico para 24 horas) elementos del pronóstico de 5 días en 3 horas, obtener la cantidad de horas "vacías" entre el primer dato y el siguiente en el array y hacer un promedio con sus temperaturas para "predecir" la posible variación de temperatura para cada hora. La solución del punto `7` es algo similar pero con los datos del pronostico para 5 días y hacer el promedio de temperatura máxima y mínima de cada 3 horas.
 
 ### Arquitectura usada
 
