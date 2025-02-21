@@ -18,6 +18,15 @@ export interface CitiesActions {
   removeFavCity: (lat: number, lon: number) => void;
 }
 
+export interface ErrorsState {
+  errors: string[];
+}
+
+export interface ErrorsActions {
+  setError: (newError: string) => void;
+  removeErrors: () => void;
+}
+
 export interface Climate {
   coord: Coord;
   weather: Weather[];
