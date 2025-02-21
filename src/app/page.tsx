@@ -1,4 +1,5 @@
 import { FavoriteCities, SearchBar, WeatherInfo } from '@/components';
+import { HourlyForecast } from '@/components/hourly-forecast';
 
 export default async function Home() {
   return (
@@ -10,9 +11,13 @@ export default async function Home() {
         </span>
       </h1>
 
-      <SearchBar />
-      <FavoriteCities />
+      <section className="grid grid-cols-1 md:grid-cols-3">
+        <SearchBar />
+        <FavoriteCities />
+      </section>
       <WeatherInfo />
+
+      <HourlyForecast />
     </main>
   );
 }

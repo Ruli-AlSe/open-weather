@@ -81,7 +81,7 @@ export const WeatherInfo = () => {
         <div className="flex flex-col justify-center">
           <button
             onClick={addCityToFav}
-            className="px-3 py-2 bg-blue-500 duration-300 hover:bg-blue-700 text-2xl rounded-lg font-bold"
+            className="px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-400 duration-300 hover:to-blue-600 text-2xl rounded-lg font-bold"
           >
             Fav city
             <Image

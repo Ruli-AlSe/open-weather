@@ -25,3 +25,29 @@ section {
   width: 100%;
   max-width: 896px;
 }
+
+#forecast-wrapper::-webkit-scrollbar,
+#favorite-cities::-webkit-scrollbar {
+  height: 5px;
+  width: 5px;
+}
+
+/* Track */
+#forecast-wrapper::-webkit-scrollbar-track,
+#favorite-cities::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#forecast-wrapper::-webkit-scrollbar-thumb,
+#favorite-cities::-webkit-scrollbar-thumb {
+  background: rgb(252, 165, 165);
+  background: linear-gradient(90deg, rgba(252, 165, 165, 1) 35%, rgba(220, 38, 38, 1) 100%);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+#forecast-wrapper::-webkit-scrollbar-thumb:hover,
+#favorite-cities::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}

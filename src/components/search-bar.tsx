@@ -32,8 +32,8 @@ export const SearchBar = () => {
   }, [location]);
 
   return (
-    <section id="search-bar-section" className="md:px-3 mt-10 flex justify-center gap-3">
-      <div className="w-full relative py-3">
+    <section id="search-bar-section" className="col-span-2 md:px-3 mt-10 flex justify-center gap-3">
+      <div className="w-full relative">
         <h2 className="text-2xl mb-3">Search for any city in the world and click on it </h2>
         <input
           className="w-full p-1 md:p-3 text-xl md:rounded-lg text-black"
@@ -45,7 +45,7 @@ export const SearchBar = () => {
           <p className="p-4 text-red-500">No results found for &quot; {location} &quot;</p>
         )}
         {cities && (
-          <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-full">
+          <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-[105%] md:top-[35%] lg:top-[30%]">
             {cities.map((city, idx) => (
               <p
                 key={`${city.lat} - ${city.lon} - ${idx}`}

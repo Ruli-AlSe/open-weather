@@ -30,15 +30,18 @@ export const FavoriteCities = () => {
   }, [addFavCities]);
 
   return (
-    <section id="favorite-cities" className="px-5">
+    <section className="px-5">
       <h2 className="text-2xl font-bold mb-4">Favorite Cities</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-white max-h-60 md:max-h-80 overflow-y-scroll hover:cursor-pointer">
+      <div
+        id="favorite-cities"
+        className="px-1 grid grid-cols-1 gap-4 text-white max-h-60 md:max-h-50 overflow-y-scroll hover:cursor-pointer"
+      >
         {!favCities.length && <p>No favorite cities added yet.</p>}
         {favCities.map(({ lat, lon, name, country, state }, idx) => {
           return (
             <div
               key={`${lat} - ${lon} - ${idx}`}
-              className="flex flex-col justify-between bg-gradient-to-r from-blue-500 to-blue-400 rounded-lg shadow-md p-4"
+              className="flex flex-col justify-between bg-gradient-to-r from-blue-500 to-blue-400 hover:to-blue-600 rounded-lg shadow-md p-4"
               onClick={() => setActiveCity({ lat, lon, name, country, state })}
             >
               <div>
