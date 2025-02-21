@@ -29,6 +29,10 @@ pnpm dev
 
 ### Descripción de proyecto
 
+Desarrollar un sistema para consultar el clima de una ciudad de cualquier parte del mundo,
+el sistema debe ser capaz de mostrar los detalles de las ciudades que se agreguen como
+favoritas y debe cumplir con los siguientes requerimientos:
+
 - Consulta de ciudad
 
   1. Tener un buscador para consultar cualquier ciudad del mundo.
