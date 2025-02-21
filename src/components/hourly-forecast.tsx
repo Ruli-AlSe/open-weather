@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { useCityStore } from '@/stores/use-city-store';
 import { getForecast } from '@/actions/get-hourly-forecast';
-import { TempForecast } from '@/lib/definitions';
+import { TempForecast } from '@/lib/definitions/requests';
+import { Subtitle } from './ui/subtitle';
+import { Card } from './ui/card';
 
 export const HourlyForecast = () => {
   const activeCity = useCityStore((state) => state.activeCity);
@@ -31,21 +33,17 @@ export const HourlyForecast = () => {
   }
 
   return (
-    <section className="flex flex-col gap-5">
-      <h2 className="text-2xl font-bold mb-4">Forecast for next 24 hrs</h2>
+    <section className="flex flex-col gap-5 fade-in-component">
+      <Subtitle text="Forecast for next 24 hrs" />
 
       <div id="forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
         {forecast.map(({ dt_txt, temp }) => {
           const [date, time] = dt_txt.split('-');
           return (
-            <div
-              key={dt_txt}
-              className="flex flex-col items-center p-3 bg-slate-500 rounded text-white"
-            >
-              <p className="w-40">{date}</p>
+            <Card key={dt_txt} title={date} timeStr={time}>
               <p className="text-3xl my-7 font-extrabold">{temp?.toFixed(1)} ºC</p>
               <p>{time}</p>
-            </div>
+            </Card>
           );
         })}
       </div>

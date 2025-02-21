@@ -1,17 +1,19 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import { getCurrentClimate } from '@/actions/get-current-climate';
-import { Climate } from '@/lib/definitions';
+import { Climate } from '@/lib/definitions/requests';
 import { useCityStore } from '@/stores/use-city-store';
-import Image from 'next/image';
+import { Button } from './ui/button';
 
 const paragraphClasses = 'text-xl mb-3';
 
 export const WeatherInfo = () => {
   const activeCity = useCityStore((state) => state.activeCity);
   const addFavCities = useCityStore((state) => state.addFavCities);
+  const favCities = useCityStore((state) => state.favCities);
   const [climate, setClimate] = useState<Climate | undefined>();
   const addCityToFav = () => {
     if (!activeCity) {
@@ -50,18 +52,19 @@ export const WeatherInfo = () => {
   const { name, country } = activeCity;
   const {
     main: { feels_like, humidity, temp, temp_max, temp_min },
+    coord,
     weather,
     id,
   } = climate;
   const weatherDescription = weather.map((w) => w.description).join(', ');
 
   return (
-    <section id="weather-info-section" className="px-5">
-      <div className="container grid grid-cols-1 md:grid-cols-3">
-        <div className="col-span-2">
+    <section id="weather-info-section" className="px-5 fade-in-component">
+      <div className="container flex flex-col">
+        <div className="w-full">
           <h2 className="text-3xl mb-3">
             Weather info for{' '}
-            <span className="bg-gradient-to-r from-red-600 to-red-300 text-transparent bg-clip-text font-extrabold">
+            <span className="bg-gradient-to-r from-orange-600 to-orange-300 text-transparent bg-clip-text font-extrabold">
               {name}, {country}
             </span>
           </h2>
@@ -82,29 +85,26 @@ export const WeatherInfo = () => {
           <p className={paragraphClasses}>Humidity: {humidity}%</p>
         </div>
 
-        <div className="flex flex-col justify-center gap-5">
-          <button
-            onClick={addCityToFav}
-            className="px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-400 duration-300 hover:to-blue-600 text-2xl rounded-lg font-bold"
-          >
-            Fav city
-            <Image
-              src="/fav-icon.svg"
-              alt="heart"
-              width={25}
-              height={25}
-              className="inline-block ml-4"
-            />
-          </button>
-          <a
+        <div className="flex flex-col lg:flex-row justify-between gap-5 mt-5">
+          <Button
+            text="Fav city"
+            buttonType="button"
+            iconUrl="/fav-icon.svg"
+            disabled={favCities.some(
+              (city) =>
+                city.lat.toFixed(3) === coord.lat.toFixed(3) &&
+                city.lon.toFixed(3) === coord.lon.toFixed(3)
+            )}
+            action={addCityToFav}
+            extraClasses="bg-gradient-to-r from-blue-500 to-blue-400 duration-300 hover:to-blue-600 text-xl rounded-lg font-bold px-5"
+          />
+          <Button
+            text="See more info"
+            buttonType="external-link"
+            iconUrl="/external-link.svg"
             href={`https://openweathermap.org/city/${id}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex justify-center px-3 py-2 bg-gradient-to-r from-red-500 to-red-300 duration-300 hover:to-red-600 text-2xl rounded-lg font-bold"
-          >
-            See more info
-            <Image src="/external-link.svg" alt="heart" width={25} height={25} className="ml-4" />
-          </a>
+            extraClasses="bg-gradient-to-r from-orange-500 to-orange-300 duration-300 hover:to-orange-600 text-xl rounded-lg font-bold"
+          />
         </div>
       </div>
     </section>

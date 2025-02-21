@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react';
 
-import { City } from '@/lib/definitions';
+import { City } from '@/lib/definitions/requests';
 import { useCityStore } from '@/stores/use-city-store';
+import { Subtitle } from './ui/subtitle';
+import { Button } from './ui/button';
 
 export const FavoriteCities = () => {
   const favCities = useCityStore((state) => state.favCities);
@@ -31,29 +33,33 @@ export const FavoriteCities = () => {
 
   return (
     <section className="px-5">
-      <h2 className="text-2xl font-bold mb-4">Favorite Cities</h2>
+      <Subtitle text="Favorite Cities" />
+
       <div
         id="favorite-cities"
-        className="px-1 grid grid-cols-1 gap-4 text-white max-h-60 md:max-h-50 overflow-y-scroll hover:cursor-pointer"
+        className="px-1 grid grid-cols-1 gap-4 text-white max-h-60 md:max-h-[26rem] overflow-y-scroll"
       >
         {!favCities.length && <p>No favorite cities added yet.</p>}
         {favCities.map(({ lat, lon, name, country, state }, idx) => {
           return (
             <div
               key={`${lat} - ${lon} - ${idx}`}
-              className="flex flex-col justify-between bg-gradient-to-r from-blue-500 to-blue-400 hover:to-blue-600 rounded-lg shadow-md p-4"
-              onClick={() => setActiveCity({ lat, lon, name, country, state })}
+              className="flex flex-col justify-between bg-gradient-to-r from-blue-500 to-blue-400 hover:to-blue-600 rounded-lg shadow-md p-4 rise-up-component"
             >
-              <div>
+              <div
+                className="mb-5 hover:cursor-pointer"
+                onClick={() => setActiveCity({ lat, lon, name, country, state })}
+              >
                 <h3 className="text-xl font-bold">{name}</h3>
                 <p className="text-gray-200">{`${state}, ${country}`}</p>
               </div>
-              <button
-                onClick={() => removeCity(lat, lon)}
-                className="w-fit px-2 py-1 mt-3 bg-red-500 duration-300 hover:bg-red-700 text-sm rounded-lg font-bold"
-              >
-                Remove fav
-              </button>
+
+              <Button
+                text="Remove fav"
+                buttonType="button"
+                action={() => removeCity(lat, lon)}
+                extraClasses="w-fit bg-red-500 duration-300 hover:bg-red-700 text-sm rounded-lg font-bold"
+              />
             </div>
           );
         })}

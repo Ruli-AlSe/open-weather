@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { debounce } from '@/lib/utils';
 import { searchCityLocation } from '@/actions/search-city-location';
-import { City } from '@/lib/definitions';
+import { City } from '@/lib/definitions/requests';
 import { useCityStore } from '@/stores/use-city-store';
+import { Subtitle } from './ui/subtitle';
 
 export const SearchBar = () => {
   const [location, setLocation] = useState<string>('');
@@ -32,9 +33,10 @@ export const SearchBar = () => {
   }, [location]);
 
   return (
-    <section id="search-bar-section" className="col-span-2 md:px-3 mt-10 flex justify-center gap-3">
+    <section id="search-bar-section" className="md:px-3 mt-10 flex justify-center gap-3">
       <div className="w-full relative">
-        <h2 className="text-2xl mb-3">Search for any city in the world and click on it </h2>
+        <Subtitle text="Search for any city in the world and click on it" />
+
         <input
           className="w-full p-1 md:p-3 text-xl md:rounded-lg text-black"
           type="text"

@@ -41,8 +41,8 @@ section {
 /* Handle */
 #forecast-wrapper::-webkit-scrollbar-thumb,
 #favorite-cities::-webkit-scrollbar-thumb {
-  background: rgb(252, 165, 165);
-  background: linear-gradient(90deg, rgba(252, 165, 165, 1) 35%, rgba(220, 38, 38, 1) 100%);
+  background: rgb(249, 115, 22);
+  background: linear-gradient(90deg, rgba(249, 115, 22, 1) 0%, rgba(253, 186, 116, 1) 100%);
   border-radius: 5px;
 }
 
@@ -50,4 +50,32 @@ section {
 #forecast-wrapper::-webkit-scrollbar-thumb:hover,
 #favorite-cities::-webkit-scrollbar-thumb:hover {
   cursor: pointer;
+}
+
+.fade-in-component {
+  animation: fadeIn 3s;
+}
+
+.rise-up-component {
+  animation: riseUp 3s;
+}
+
+@keyframes riseUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

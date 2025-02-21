@@ -92,3 +92,23 @@ export const convertToDailyTempForecast = (forecast: Forecast[]) => {
 
   return result;
 };
+
+export const isRushHour = (timeStr: string) => {
+  const [time] = timeStr.split(' ');
+  const [hours] = time.split(':');
+  const hour = parseInt(hours);
+
+  return hour >= 6 && hour <= 8;
+};
+
+export const isDayHour = (timeStr: string) => {
+  const [time, period] = timeStr.split(' ');
+  const [hours] = time.split(':');
+  const hour = parseInt(hours);
+
+  return (
+    (hour > 8 && hour < 12 && period === 'AM') ||
+    (hour === 12 && period === 'PM') ||
+    (hour >= 1 && hour < 6 && period === 'PM')
+  );
+};

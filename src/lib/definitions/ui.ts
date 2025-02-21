@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 type BaseButtonProps = {
   text: string;
   disabled?: boolean;
@@ -18,3 +20,9 @@ type LinkButtonProps = BaseButtonProps & {
 };
 
 export type ButtonProps = ActionButtonProps | LinkButtonProps;
+
+export interface CardProps {
+  title: string;
+  timeStr?: string;
+  children: ReactNode;
+}
