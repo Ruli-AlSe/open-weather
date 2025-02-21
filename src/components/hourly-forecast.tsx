@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
-import { useCityStore } from '@/stores/use-city-store';
-import { getForecast } from '@/actions/get-hourly-forecast';
+import { getHourlyForecast } from '@/actions/get-hourly-forecast';
 import { TempForecast } from '@/lib/definitions/requests';
 import { Subtitle } from './ui/subtitle';
 import { Card } from './ui/card';
+import { useErrorStore, useCityStore } from '@/stores';
 
 export const HourlyForecast = () => {
   const activeCity = useCityStore((state) => state.activeCity);
   const [forecast, setForecast] = useState<TempForecast[]>([]);
+  const setError = useErrorStore((state) => state.setError);
 
   useEffect(() => {
     const getClimate = async () => {
@@ -19,9 +20,15 @@ export const HourlyForecast = () => {
       }
 
       const { lat, lon } = activeCity;
-      const res = await getForecast(lat, lon);
-      if (res) {
+      try {
+        const res = await getHourlyForecast(lat, lon);
         setForecast(res);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('Unknown error');
+        }
       }
     };
 

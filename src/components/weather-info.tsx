@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { getCurrentClimate } from '@/actions/get-current-climate';
 import { Climate } from '@/lib/definitions/requests';
-import { useCityStore } from '@/stores/use-city-store';
+import { useCityStore, useErrorStore } from '@/stores';
 import { Button } from './ui/button';
 
 const paragraphClasses = 'text-xl mb-3';
@@ -14,6 +14,7 @@ export const WeatherInfo = () => {
   const activeCity = useCityStore((state) => state.activeCity);
   const addFavCities = useCityStore((state) => state.addFavCities);
   const favCities = useCityStore((state) => state.favCities);
+  const setError = useErrorStore((state) => state.setError);
   const [climate, setClimate] = useState<Climate | undefined>();
   const addCityToFav = () => {
     if (!activeCity) {
@@ -38,8 +39,17 @@ export const WeatherInfo = () => {
       }
 
       const { lat, lon } = activeCity;
-      const res = await getCurrentClimate(lat, lon);
-      setClimate(res);
+
+      try {
+        const res = await getCurrentClimate(lat, lon);
+        setClimate(res);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('Unknown error');
+        }
+      }
     };
 
     getClimate();

@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 import { debounce } from '@/lib/utils';
 import { searchCityLocation } from '@/actions/search-city-location';
 import { City } from '@/lib/definitions/requests';
-import { useCityStore } from '@/stores/use-city-store';
 import { Subtitle } from './ui/subtitle';
+import { useErrorStore, useCityStore } from '@/stores';
 
 export const SearchBar = () => {
   const [location, setLocation] = useState<string>('');
   const [cities, setCities] = useState<City[] | undefined>();
+  const setError = useErrorStore((state) => state.setError);
   const setActiveCity = useCityStore((state) => state.setActiveCity);
   const processChange = debounce((value: string) => setLocation(value));
 
@@ -21,8 +22,16 @@ export const SearchBar = () => {
 
   useEffect(() => {
     const getCities = async () => {
-      const res = await searchCityLocation(location);
-      setCities(res);
+      try {
+        const res = await searchCityLocation(location);
+        setCities(res);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('Unknown error');
+        }
+      }
     };
 
     if (location.length > 0) {

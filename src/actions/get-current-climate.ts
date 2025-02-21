@@ -19,6 +19,6 @@ export const getCurrentClimate = async (lat: number, lon: number) => {
     return data;
   } catch (error) {
     console.error(error);
-    return undefined;
+    throw new Error('Failed to fetch current weather information');
   }
 };

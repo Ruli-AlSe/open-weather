@@ -4,7 +4,8 @@ import { City } from '@/lib/definitions/requests';
 
 export const searchCityLocation = async (query: string) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;
-  const apiKey = process.env.WEATHERAPP_API_KEY;
+  // const apiKey = process.env.WEATHERAPP_API_KEY;
+  const apiKey = undefined;
 
   try {
     if (!apiUrl || !apiKey) {
@@ -17,6 +18,6 @@ export const searchCityLocation = async (query: string) => {
     return data;
   } catch (error) {
     console.error(error);
-    return undefined;
+    throw new Error('Failed to search for city name');
   }
 };

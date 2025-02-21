@@ -57,7 +57,7 @@ section {
 }
 
 .rise-up-component {
-  animation: riseUp 3s;
+  animation: riseUp 2s;
 }
 
 @keyframes riseUp {

@@ -3,7 +3,7 @@
 import { apiDateFormat, convert3hrForecastToHourlyForecast } from '@/lib/utils';
 import { getCurrentClimate } from './get-current-climate';
 
-export const getForecast = async (lat: number, lon: number) => {
+export const getHourlyForecast = async (lat: number, lon: number) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;
   const apiKey = process.env.WEATHERAPP_API_KEY;
 
@@ -17,10 +17,6 @@ export const getForecast = async (lat: number, lon: number) => {
     ]);
     const forcastData = await forecastRes.json();
 
-    if (currentWeatherRes === undefined) {
-      return undefined;
-    }
-
     const hourlyForecast = convert3hrForecastToHourlyForecast([
       { dt_txt: apiDateFormat(new Date()), main: currentWeatherRes.main },
       ...forcastData.list,
@@ -29,6 +25,6 @@ export const getForecast = async (lat: number, lon: number) => {
     return hourlyForecast;
   } catch (error) {
     console.error(error);
-    return undefined;
+    throw new Error('Failed to fetch hourly forecast information');
   }
 };

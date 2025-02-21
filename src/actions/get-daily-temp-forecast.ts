@@ -20,6 +20,6 @@ export const getDailyTempForecast = async (lat: number, lon: number) => {
     return dailyTempForecast;
   } catch (error) {
     console.error(error);
-    return undefined;
+    throw new Error('Failed to fetch daily temperature information');
   }
 };
