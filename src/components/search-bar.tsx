@@ -45,7 +45,7 @@ export const SearchBar = () => {
           <p className="p-4 text-red-500">No results found for &quot; {location} &quot;</p>
         )}
         {cities && (
-          <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-[105%] md:top-[35%] lg:top-[30%]">
+          <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-[105%] md:top-[130px] lg:top-[100px]">
             {cities.map((city, idx) => (
               <p
                 key={`${city.lat} - ${city.lon} - ${idx}`}

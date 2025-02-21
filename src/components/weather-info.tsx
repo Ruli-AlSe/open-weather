@@ -51,6 +51,7 @@ export const WeatherInfo = () => {
   const {
     main: { feels_like, humidity, temp, temp_max, temp_min },
     weather,
+    id,
   } = climate;
   const weatherDescription = weather.map((w) => w.description).join(', ');
 
@@ -59,7 +60,10 @@ export const WeatherInfo = () => {
       <div className="container grid grid-cols-1 md:grid-cols-3">
         <div className="col-span-2">
           <h2 className="text-3xl mb-3">
-            Weather info for {name}, {country}
+            Weather info for{' '}
+            <span className="bg-gradient-to-r from-red-600 to-red-300 text-transparent bg-clip-text font-extrabold">
+              {name}, {country}
+            </span>
           </h2>
 
           <div className={`${paragraphClasses} flex items-center`}>
@@ -78,7 +82,7 @@ export const WeatherInfo = () => {
           <p className={paragraphClasses}>Humidity: {humidity}%</p>
         </div>
 
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center gap-5">
           <button
             onClick={addCityToFav}
             className="px-3 py-2 bg-gradient-to-r from-blue-500 to-blue-400 duration-300 hover:to-blue-600 text-2xl rounded-lg font-bold"
@@ -92,6 +96,15 @@ export const WeatherInfo = () => {
               className="inline-block ml-4"
             />
           </button>
+          <a
+            href={`https://openweathermap.org/city/${id}`}
+            target="_blank"
+            rel="noreferrer"
+            className="flex justify-center px-3 py-2 bg-gradient-to-r from-red-500 to-red-300 duration-300 hover:to-red-600 text-2xl rounded-lg font-bold"
+          >
+            See more info
+            <Image src="/external-link.svg" alt="heart" width={25} height={25} className="ml-4" />
+          </a>
         </div>
       </div>
     </section>
