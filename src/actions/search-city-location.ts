@@ -1,6 +1,6 @@
 'use server';
 
-import { City } from '@/lib/definitions';
+import { City } from '@/lib/definitions/requests';
 
 export const searchCityLocation = async (query: string) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;

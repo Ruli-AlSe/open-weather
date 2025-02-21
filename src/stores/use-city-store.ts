@@ -1,4 +1,4 @@
-import { CitiesActions, CitiesState } from '@/lib/definitions';
+import { CitiesActions, CitiesState } from '@/lib/definitions/requests';
 import { create } from 'zustand';
 
 export const useCityStore = create<CitiesState & CitiesActions>((set) => ({

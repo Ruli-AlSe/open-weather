@@ -1,6 +1,10 @@
-import { FavoriteCities, SearchBar, WeatherInfo } from '@/components';
-import { DailyTempForecast } from '@/components/daily-temp-forecast';
-import { HourlyForecast } from '@/components/hourly-forecast';
+import {
+  FavoriteCities,
+  SearchBar,
+  WeatherInfo,
+  DailyTempForecast,
+  HourlyForecast,
+} from '@/components';
 
 export default async function Home() {
   return (

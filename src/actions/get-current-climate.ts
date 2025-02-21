@@ -1,6 +1,6 @@
 'use server';
 
-import { Climate } from '@/lib/definitions';
+import { Climate } from '@/lib/definitions/requests';
 
 export const getCurrentClimate = async (lat: number, lon: number) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;

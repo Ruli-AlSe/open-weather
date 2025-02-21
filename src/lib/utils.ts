@@ -1,4 +1,4 @@
-import { Forecast, TempForecast } from './definitions';
+import { Forecast, TempForecast } from './definitions/requests';
 
 export const debounce = (callback: (value: string) => void, timeout = 400) => {
   let timer: NodeJS.Timeout;

@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 
 import { useCityStore } from '@/stores/use-city-store';
-import { TempForecast } from '@/lib/definitions';
+import { TempForecast } from '@/lib/definitions/requests';
 import { getDailyTempForecast } from '@/actions/get-daily-temp-forecast';
+import { Subtitle } from './ui/subtitle';
 
 export const DailyTempForecast = () => {
   const activeCity = useCityStore((state) => state.activeCity);
@@ -31,8 +32,8 @@ export const DailyTempForecast = () => {
   }
 
   return (
-    <section className="flex flex-col gap-5">
-      <h2 className="text-2xl font-bold mb-4">Forecast max/min temp for the rest of the week</h2>
+    <section className="flex flex-col gap-5 fade-in-component">
+      <Subtitle text="Forecast max/min temp for the rest of the week" />
 
       <div id="forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
         {forecast.map(({ dt_txt, temp_max, temp_min }) => (
