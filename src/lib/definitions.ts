@@ -64,3 +64,17 @@ export interface Wind {
   deg: number;
   gust: number;
 }
+
+export interface Forecast {
+  dt: number;
+  main: Environment;
+  weather: Weather[];
+  clouds: Cloudiness;
+  pop: number;
+  dt_txt: string;
+}
+
+export interface HourlyTemp {
+  temp: number;
+  dt_txt: string;
+}
