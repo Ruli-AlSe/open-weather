@@ -1,6 +1,6 @@
 import { getCurrentClimate } from '@/actions/get-current-climate';
 
-describe('Get current climate action', () => {
+describe('Action - Get current climate', () => {
   it('returns valid data when valid params are passed to it', async () => {
     const response = await getCurrentClimate(20.571358, -101.192444);
 
