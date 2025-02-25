@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main Page matches snapshot 1`] = `
+<DocumentFragment>
+  <main
+    class="w-full flex flex-col items-center min-h-screen p-4 sm:p-10 bg-black"
+  >
+    <h1
+      class="flex flex-col text-center sm:flex-row gap-3 text-5xl tracking-wider mt-16"
+    >
+      🌍 
+      <span
+        class="bg-gradient-to-r from-orange-500 to-orange-300 text-transparent bg-clip-text"
+      >
+        <b>
+          Weather
+        </b>
+         Forecast
+      </span>
+    </h1>
+    <section
+      class="flex flex-col-reverse md:grid md:grid-cols-3"
+    >
+      <div
+        class="col-span-2 flex flex-col"
+      >
+        <section
+          class="md:px-3 mt-10 flex justify-center gap-3"
+          id="search-bar-section"
+        >
+          <div
+            class="w-full relative"
+          >
+            <h2
+              class="text-2xl font-bold mt-4"
+            >
+              Search for any city in the world and click on it
+            </h2>
+            <input
+              class="w-full p-1 md:p-3 text-xl md:rounded-lg text-black"
+              placeholder="Enter location"
+              type="text"
+            />
+          </div>
+        </section>
+      </div>
+      <section
+        class="px-5"
+      >
+        <h2
+          class="text-2xl font-bold mt-4"
+        >
+          Favorite Cities
+        </h2>
+        <div
+          class="px-1 grid grid-cols-1 gap-4 text-white max-h-60 md:max-h-[26rem] overflow-y-scroll"
+          id="favorite-cities"
+        >
+          <p>
+            No favorite cities added yet.
+          </p>
+        </div>
+      </section>
+    </section>
+  </main>
+</DocumentFragment>
+`;
