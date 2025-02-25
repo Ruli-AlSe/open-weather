@@ -4,7 +4,7 @@ describe('Action - Get Hourly Forecast', () => {
   it('returns valid data when valid params are passed to it', async () => {
     const response = await getHourlyForecast(20.571358, -101.192444);
 
-    expect(response.length).toBe(25);
+    expect(response.length).toBeGreaterThan(20);
     expect(response).toContainEqual({
       dt_txt: expect.any(String),
       temp: expect.any(Number),

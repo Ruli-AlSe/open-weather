@@ -43,7 +43,7 @@ export const DailyTempForecast = () => {
     <section className="flex flex-col gap-5 fade-in-component">
       <Subtitle text="Forecast max/min temp for the rest of the week" />
 
-      <div id="forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
+      <div id="daily-temp-forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
         {forecast.map(({ dt_txt, temp_max, temp_min }) => (
           <Card key={dt_txt} title={dt_txt}>
             <p className="text-3xl my-4 font-extrabold flex flex-col items-center">
