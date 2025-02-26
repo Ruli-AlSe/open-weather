@@ -66,6 +66,7 @@ describe('Component - Favorite cities', () => {
     const { result } = renderHook(() => useCityStore((state) => state));
     render(<FavoriteCities />);
 
+    expect(result.current.activeCity).toEqual(null);
     const cardTitle = (await screen.findAllByText('Salamanca'))[0];
     act(() => cardTitle.click());
 

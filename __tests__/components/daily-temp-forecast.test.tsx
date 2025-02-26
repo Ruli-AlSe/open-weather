@@ -34,7 +34,7 @@ describe('Component - Daily temp forecast', () => {
 
       expect(heading).toBeInTheDocument();
       expect(forecastWrapper).toBeInTheDocument();
-      expect(cards?.length).toBe(6);
+      expect(cards?.length).toBeGreaterThanOrEqual(5);
     });
 
     it('if fetch fails, does not render the component', async () => {

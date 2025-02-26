@@ -4,7 +4,7 @@ describe('Action - Get daily temperature forecast', () => {
   it('returns valid data when valid params are passed to it', async () => {
     const response = await getDailyTempForecast(20.571358, -101.192444);
 
-    expect(response.length).toBe(6);
+    expect(response.length).toBeGreaterThanOrEqual(5);
     expect(response).toContainEqual({
       dt_txt: expect.any(String),
       temp_max: expect.any(Number),

@@ -53,12 +53,15 @@ export const SearchBar = () => {
           onChange={(e) => processChange(e.target.value)}
         />
         {cities?.length === 0 && (
-          <p className="p-4 text-red-500">No results found for &quot; {location} &quot;</p>
+          <p data-testid="search-error-message" className="p-4 text-red-500">
+            No results found for &quot; {location} &quot;
+          </p>
         )}
         {cities && (
           <div className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-[105%] md:top-[130px] lg:top-[105px]">
             {cities.map((city, idx) => (
               <p
+                data-testid="search-city-option"
                 key={`${city.lat} - ${city.lon} - ${idx}`}
                 className="cursor-pointer text-black hover:bg-gray-100 px-4 py-2"
                 onClick={() => selectActiveCity(city)}
