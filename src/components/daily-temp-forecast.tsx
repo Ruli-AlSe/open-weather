@@ -40,17 +40,36 @@ export const DailyTempForecast = () => {
   }
 
   return (
-    <section className="flex flex-col gap-5 fade-in-component">
+    <section 
+      className="flex flex-col gap-5 fade-in-component"
+      aria-label={`Daily temperature forecast for ${activeCity?.name}, ${activeCity?.country}`}
+    >
       <Subtitle text="Forecast max/min temp for the rest of the week" />
 
-      <div id="daily-temp-forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
+      <div 
+        id="daily-temp-forecast-wrapper" 
+        className="w-full flex gap-5 overflow-x-scroll py-5"
+        role="region"
+        aria-label="Daily temperature forecast scrollable content"
+        tabIndex={0}
+      >
         {forecast.map(({ dt_txt, temp_max, temp_min }) => (
-          <Card key={dt_txt} title={dt_txt}>
-            <p className="text-3xl my-4 font-extrabold flex flex-col items-center">
+          <Card 
+            key={dt_txt} 
+            title={dt_txt}
+            aria-label={`Weather forecast for ${dt_txt}`}
+          >
+            <p 
+              className="text-3xl my-4 font-extrabold flex flex-col items-center"
+              aria-label={`Maximum temperature: ${temp_max?.toFixed(1)} degrees Celsius`}
+            >
               <span className="text-sm">Max temp.</span>
               <span>{temp_max?.toFixed(1)} ºC</span>
             </p>
-            <p className="text-3xl my-4 font-extrabold flex flex-col items-center">
+            <p 
+              className="text-3xl my-4 font-extrabold flex flex-col items-center"
+              aria-label={`Minimum temperature: ${temp_min?.toFixed(1)} degrees Celsius`}
+            >
               <span className="text-sm">Min temp.</span>
               <span>{temp_min?.toFixed(1)} ºC</span>
             </p>

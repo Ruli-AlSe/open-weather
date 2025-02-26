@@ -13,6 +13,7 @@ export const Button = ({
   href,
   disabled = false,
   testId,
+  ...rest
 }: ButtonProps) => {
   if (buttonType === 'button') {
     return (
@@ -24,6 +25,7 @@ export const Button = ({
         disabled={disabled}
         onClick={action}
         data-testid={testId}
+        {...rest}
       >
         {text}
         {iconUrl && <Image src={iconUrl} alt={text} width={25} height={25} className="ml-4" />}
@@ -39,6 +41,7 @@ export const Button = ({
         rel="noreferrer"
         className={clsx('flex justify-center px-3 py-2 rounded-lg font-bold', extraClasses)}
         data-testid={testId}
+        {...rest}
       >
         {text}
         {iconUrl && <Image src={iconUrl} alt={text} width={25} height={25} className="ml-4" />}
@@ -51,6 +54,7 @@ export const Button = ({
       href={href!}
       className={clsx('flex justify-center px-3 py-2 rounded-lg font-bold', extraClasses)}
       data-testid={testId}
+      {...rest}
     >
       {text}
       {iconUrl && <Image src={iconUrl} alt={text} width={25} height={25} className="ml-4" />}

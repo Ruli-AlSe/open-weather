@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { CardProps } from '@/lib/definitions/ui';
 import { isDayHour, isRushHour } from '@/lib/utils';
 
-export const Card = ({ title, timeStr, children }: CardProps) => {
+export const Card = ({ title, timeStr, children, ...rest }: CardProps) => {
   return (
     <div
       className={clsx('flex flex-col items-center p-3 rounded text-white', {
@@ -13,6 +13,7 @@ export const Card = ({ title, timeStr, children }: CardProps) => {
           timeStr && !isRushHour(timeStr) && !isDayHour(timeStr),
         'bg-orange-500': !timeStr,
       })}
+      {...rest}
     >
       <p className="w-40">{title}</p>
       {children}
