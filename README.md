@@ -64,11 +64,16 @@ La aplicación fue creada con el framework `Next.js` para hacer peticiones al AP
 
 ```bash
 .
-├── public              // todos los assets estáticos
+├── __tests__           // Tests unitarios y de integración, sigue la misma estructura de la carpeta `app` para mantener la organizacion de los tests
+│   ├── actions
+│   ├── app
+│   ├── components
+│   ├── ...
+├── public              // Todos los assets estáticos
 ├── src                 // código fuente
 │   ├── actions         // Funciones de servidor para hacer consultas al API de OpenWeatherMap
 │   ├── app             // Layouts, Paginas y rutas de la aplicación
-│   ├── components      // componentes utilizados en las páginas
+│   ├── components      // Componentes utilizados en las páginas
 │   │   ├── ui          // Componentes atómicos
 │   │   ├── auth *      // Esta carpeta no existe pero pudieran almacenarse componentes relacionados con la autenticación y seguir este enfoque para cada ruta
 │   │   ├── home *
@@ -76,13 +81,14 @@ La aplicación fue creada con el framework `Next.js` para hacer peticiones al AP
 │   │   ├── definitions // Tipos de datos
 │   ├── stores          // Funciones del gestor de estado global
 │   ├── hooks *         // Propuesta para hooks personalizados
+│   ├── ...
 ```
 
 ### Trade-offs
 
 Lista de cosas que me gustaría implementar pero no pude debido a tiempo.
 
-- Agregar elementos para accesibilidad en los componentes.
+- ✅ Agregar elementos para accesibilidad en los componentes.
 - ✅ Agregar tests unitarios y de integración (Hice mucho testing manual para asegurar el buen funcionamiento, pero es una excelente practica para agregar tests automatizados y evitar el testing manual cuando la aplicación crece).
 - Funcionalidad para obtener información en diferentes sistemas métricos
 - Funcionalidad para hacer una aplicación multi-idioma.
