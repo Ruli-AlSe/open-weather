@@ -3,12 +3,20 @@
 exports[`Main Page matches snapshot 1`] = `
 <DocumentFragment>
   <main
+    aria-label="Weather forecast application"
     class="w-full flex flex-col items-center min-h-screen p-4 sm:p-10 bg-black"
+    role="main"
   >
     <h1
+      aria-label="Weather Forecast"
       class="flex flex-col text-center sm:flex-row gap-3 text-5xl tracking-wider mt-16"
     >
-      🌍 
+      <span
+        aria-hidden="true"
+      >
+        🌍
+      </span>
+       
       <span
         class="bg-gradient-to-r from-orange-500 to-orange-300 text-transparent bg-clip-text"
       >
@@ -19,12 +27,15 @@ exports[`Main Page matches snapshot 1`] = `
       </span>
     </h1>
     <section
+      aria-label="Main weather information"
       class="flex flex-col-reverse md:grid md:grid-cols-3"
+      role="region"
     >
       <div
         class="col-span-2 flex flex-col"
       >
         <section
+          aria-label="City search"
           class="md:px-3 mt-10 flex justify-center gap-3"
           id="search-bar-section"
         >
@@ -32,36 +43,56 @@ exports[`Main Page matches snapshot 1`] = `
             class="w-full relative"
           >
             <h2
-              class="text-2xl font-bold mt-4"
+              class="text-2xl font-bold my-4"
             >
               Search for any city in the world and click on it
             </h2>
-            <input
-              class="w-full p-1 md:p-3 text-xl md:rounded-lg text-black"
-              placeholder="Enter location"
-              type="text"
-            />
+            <div
+              aria-controls="city-list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              role="combobox"
+            >
+              <input
+                aria-autocomplete="list"
+                aria-controls="city-list"
+                aria-label="Search for a city"
+                class="w-full p-2 md:p-3 text-xl rounded md:rounded-lg text-black"
+                placeholder="Enter location"
+                type="text"
+              />
+            </div>
           </div>
         </section>
       </div>
       <section
+        aria-label="Favorite cities list"
         class="px-5"
+        role="region"
       >
         <h2
-          class="text-2xl font-bold mt-4"
+          class="text-2xl font-bold my-4"
         >
           Favorite Cities
         </h2>
         <div
+          aria-label="List of favorite cities"
           class="px-1 grid grid-cols-1 gap-4 text-white max-h-60 md:max-h-[26rem] overflow-y-scroll"
           id="favorite-cities"
+          role="list"
         >
-          <p>
+          <p
+            role="alert"
+          >
             No favorite cities added yet.
           </p>
         </div>
       </section>
     </section>
+    <section
+      aria-label="Detailed weather forecasts"
+      role="region"
+    />
   </main>
 </DocumentFragment>
 `;

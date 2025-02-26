@@ -1,3 +1,3 @@
 export const Subtitle = ({ text }: { text: string }) => {
-  return <h2 className="text-2xl font-bold mt-4">{text}</h2>;
+  return <h2 className="text-2xl font-bold my-4">{text}</h2>;
 };
