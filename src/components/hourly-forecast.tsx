@@ -43,7 +43,7 @@ export const HourlyForecast = () => {
     <section className="flex flex-col gap-5 fade-in-component">
       <Subtitle text="Forecast for next 24 hrs" />
 
-      <div id="forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
+      <div id="hourly-forecast-wrapper" className="w-full flex gap-5 overflow-x-scroll py-5">
         {forecast.map(({ dt_txt, temp }) => {
           const [date, time] = dt_txt.split('-');
           return (

@@ -44,6 +44,7 @@ export const FavoriteCities = () => {
           return (
             <div
               key={`${lat} - ${lon} - ${idx}`}
+              data-testid="favorite-city"
               className="flex flex-col justify-between bg-gradient-to-r from-blue-500 to-blue-400 hover:to-blue-600 rounded-lg shadow-md p-4 rise-up-component"
             >
               <div
@@ -59,6 +60,7 @@ export const FavoriteCities = () => {
                 buttonType="button"
                 action={() => removeCity(lat, lon)}
                 extraClasses="w-fit bg-red-500 duration-300 hover:bg-red-700 text-sm rounded-lg font-bold"
+                testId={`remove-fav-city-${name}-${state}-${country}`}
               />
             </div>
           );

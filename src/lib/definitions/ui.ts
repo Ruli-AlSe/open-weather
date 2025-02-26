@@ -5,6 +5,7 @@ type BaseButtonProps = {
   disabled?: boolean;
   extraClasses?: string;
   iconUrl?: string;
+  testId?: string;
 };
 
 type ActionButtonProps = BaseButtonProps & {
