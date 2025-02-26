@@ -1,4 +1,4 @@
-import { Forecast, TempForecast } from './definitions/requests';
+import { City, Forecast, TempForecast } from './definitions/requests';
 
 export const debounce = (callback: (value: string) => void, timeout = 400) => {
   let timer: NodeJS.Timeout;
@@ -66,27 +66,23 @@ export const apiDateFormat = (date: Date) => {
 export const convertToDailyTempForecast = (forecast: Forecast[]) => {
   const result: TempForecast[] = [];
 
-  let tempMaxAcc = 0;
-  let tempMinAcc = 0;
-  let counter = 0;
+  let tempMaxAcc: number[] = [];
+  let tempMinAcc: number[] = [];
   for (let i = 0; i < forecast.length; i++) {
     const currentElem = forecast[i];
     const currentDate = currentElem.dt_txt;
-    tempMaxAcc += currentElem.main.temp_max;
-    tempMinAcc += currentElem.main.temp_min;
+    tempMaxAcc.push(currentElem.main.temp_max);
+    tempMinAcc.push(currentElem.main.temp_min);
 
-    if (forecast[i + 1] && currentDate.split(' ')[0] === forecast[i + 1].dt_txt.split(' ')[0]) {
-      counter++;
-    } else {
+    if (!forecast[i + 1] || currentDate.split(' ')[0] !== forecast[i + 1].dt_txt.split(' ')[0]) {
       const formattedDate = new Date(currentDate.split(' ')[0]).toDateString();
       result.push({
-        temp_max: Number((tempMaxAcc / counter).toFixed(2)),
-        temp_min: Number((tempMinAcc / counter).toFixed(2)),
+        temp_max: Math.max(...tempMaxAcc),
+        temp_min: Math.min(...tempMinAcc),
         dt_txt: formattedDate,
       });
-      tempMaxAcc = 0;
-      tempMinAcc = 0;
-      counter = 0;
+      tempMaxAcc = [];
+      tempMinAcc = [];
     }
   }
 
@@ -111,4 +107,24 @@ export const isDayHour = (timeStr: string) => {
     (hour === 12 && period === 'PM') ||
     (hour >= 1 && hour < 6 && period === 'PM')
   );
+};
+
+export const saveActiveCityToLocalStorage = (activeCity: City) => {
+  const localStorageCities = localStorage.getItem('fav-cities');
+  if (!localStorageCities) {
+    localStorage.setItem('fav-cities', JSON.stringify([activeCity]));
+  } else {
+    const favCities = JSON.parse(localStorageCities);
+    favCities.push(activeCity);
+    localStorage.setItem('fav-cities', JSON.stringify(favCities));
+  }
+};
+
+export const removeActiveCityFromLocalStorage = (lat: number, lon: number) => {
+  const localStorageCities = localStorage.getItem('fav-cities');
+  if (localStorageCities) {
+    const parsedFavCities = JSON.parse(localStorageCities) as City[];
+    const newFavCities = parsedFavCities.filter((city) => city.lat !== lat && city.lon !== lon);
+    localStorage.setItem('fav-cities', JSON.stringify(newFavCities));
+  }
 };
