@@ -17,9 +17,6 @@ export const WeatherInfo = () => {
   const setError = useErrorStore((state) => state.setError);
   const [climate, setClimate] = useState<Climate | undefined>();
   const addCityToFav = () => {
-    if (!activeCity) {
-      return;
-    }
     const localStorageCities = localStorage.getItem('fav-cities');
     if (!localStorageCities) {
       localStorage.setItem('fav-cities', JSON.stringify([activeCity]));
@@ -28,7 +25,7 @@ export const WeatherInfo = () => {
       favCities.push(activeCity);
       localStorage.setItem('fav-cities', JSON.stringify(favCities));
     }
-    addFavCities([activeCity]);
+    addFavCities([activeCity!]);
   };
 
   useEffect(() => {

@@ -35,7 +35,7 @@ describe('Component - Weather info', () => {
       expect(seeMoreButton).toBeInTheDocument();
     });
 
-    it('when clicking on favrite button, it should be added to favorites only once', async () => {
+    it('when clicking on favorite button, it should be added to favorites only once', async () => {
       const { result } = renderHook(() => useCityStore((state) => state));
       render(<WeatherInfo />);
       act(() => result.current.setActiveCity(city));
@@ -43,6 +43,10 @@ describe('Component - Weather info', () => {
       const favButton = await screen.findByText('Fav city');
       act(() => favButton.click());
       expect(result.current.favCities).toHaveLength(1);
+
+      // check local storage to be sure the city was saved there
+      const sessionStorageCities = localStorage.getItem('fav-cities');
+      expect(sessionStorageCities).toBeTruthy();
 
       act(() => favButton.click());
       expect(result.current.favCities).toHaveLength(1);

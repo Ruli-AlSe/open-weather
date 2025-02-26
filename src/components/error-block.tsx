@@ -24,6 +24,7 @@ export const ErrorBlock = () => {
       {errors.map((error, index) => (
         <p
           id="error-alert"
+          data-testid="error-alert"
           key={index}
           className="w-full p-5 text-center bg-red-800 text-white text-xl mb-3 rounded-2xl rise-up-component"
         >

@@ -6,10 +6,6 @@ import { useCityStore } from '@/stores';
 describe('Component - Search bar', () => {
   const headingText = 'Search for any city in the world and click on it';
 
-  afterEach(() => {
-    localStorage.clear();
-  });
-
   it('renders the heading and search bar when the component loads', () => {
     render(<SearchBar />);
 
