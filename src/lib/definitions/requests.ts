@@ -7,12 +7,20 @@ export interface City {
   state: string;
 }
 
+export type Units = {
+  metric: 'metric';
+  imperial: 'imperial';
+  standard: 'standard';
+};
+
 export interface CitiesState {
+  units: keyof Units;
   activeCity: City | null;
   favCities: City[];
 }
 
 export interface CitiesActions {
+  setUnits: (units: keyof Units) => void;
   setActiveCity: (city: City | null) => void;
   addFavCities: (cities: City[]) => void;
   removeFavCity: (lat: number, lon: number) => void;

@@ -1,8 +1,13 @@
 'use server';
 
+import { Units } from '@/lib/definitions/requests';
 import { convertToDailyTempForecast } from '@/lib/utils';
 
-export const getDailyTempForecast = async (lat: number, lon: number) => {
+export const getDailyTempForecast = async (
+  lat: number,
+  lon: number,
+  units: keyof Units = 'metric'
+) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;
   const apiKey = process.env.WEATHERAPP_API_KEY;
 
@@ -11,7 +16,7 @@ export const getDailyTempForecast = async (lat: number, lon: number) => {
       throw new Error('API URL or API key is missing');
     }
     const forecastRes = await fetch(
-      `${apiUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+      `${apiUrl}/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`
     );
     const forecastData = await forecastRes.json();
 

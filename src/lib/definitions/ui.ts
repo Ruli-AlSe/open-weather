@@ -27,3 +27,10 @@ export interface CardProps {
   timeStr?: string;
   children: ReactNode;
 }
+
+export interface RadioButtonsProps {
+  title: string;
+  options: { value: string; label: string }[];
+  defaultValue: string;
+  changeValue: (value: string) => void;
+}

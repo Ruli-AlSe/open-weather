@@ -5,17 +5,18 @@ import clsx from 'clsx';
 
 import { debounce } from '@/lib/utils';
 import { searchCityLocation } from '@/actions/search-city-location';
-import { City } from '@/lib/definitions/requests';
+import { City, Units } from '@/lib/definitions/requests';
 import { Subtitle } from './ui/subtitle';
 import { useErrorStore, useCityStore } from '@/stores';
+import { RadioButtons } from './ui/radio-buttons';
 
 export const SearchBar = () => {
   const [location, setLocation] = useState<string>('');
   const [cities, setCities] = useState<City[] | undefined>();
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const setError = useErrorStore((state) => state.setError);
-  const setActiveCity = useCityStore((state) => state.setActiveCity);
-  const processChange = debounce((value: string) => setLocation(value));
+  const { setActiveCity, setUnits, units } = useCityStore((state) => state);
+  const processLocationChange = debounce((value: string) => setLocation(value));
 
   const selectActiveCity = (city: City) => {
     setActiveCity(city);
@@ -86,7 +87,7 @@ export const SearchBar = () => {
             className="w-full p-2 md:p-3 text-xl rounded md:rounded-lg text-black"
             type="text"
             placeholder="Enter location"
-            onChange={(e) => processChange(e.target.value)}
+            onChange={(e) => processLocationChange(e.target.value)}
             onKeyDown={handleKeyDown}
             aria-label="Search for a city"
             aria-autocomplete="list"
@@ -94,6 +95,16 @@ export const SearchBar = () => {
             aria-activedescendant={activeIndex >= 0 ? `city-option-${activeIndex}` : undefined}
           />
         </div>
+        <RadioButtons
+          title="Select units of measurement:"
+          options={[
+            { label: 'Metric (ºC)', value: 'metric' },
+            { label: 'Imperial (ºF)', value: 'imperial' },
+            { label: 'Stardard (K)', value: 'standard' },
+          ]}
+          changeValue={(value) => setUnits(value as keyof Units)}
+          defaultValue={units}
+        />
 
         {cities?.length === 0 && (
           <p role="alert" data-testid="search-error-message" className="p-4 text-red-500">

@@ -7,9 +7,10 @@ import { TempForecast } from '@/lib/definitions/requests';
 import { Subtitle } from './ui/subtitle';
 import { Card } from './ui/card';
 import { useErrorStore, useCityStore } from '@/stores';
+import { formatTemperature } from '@/lib/utils';
 
 export const HourlyForecast = () => {
-  const activeCity = useCityStore((state) => state.activeCity);
+  const { activeCity, units } = useCityStore((state) => state);
   const [forecast, setForecast] = useState<TempForecast[]>([]);
   const setError = useErrorStore((state) => state.setError);
 
@@ -21,7 +22,7 @@ export const HourlyForecast = () => {
 
       const { lat, lon } = activeCity;
       try {
-        const res = await getHourlyForecast(lat, lon);
+        const res = await getHourlyForecast(lat, lon, units);
         setForecast(res);
       } catch (error) {
         if (error instanceof Error) {
@@ -33,7 +34,7 @@ export const HourlyForecast = () => {
     };
 
     getClimate();
-  }, [activeCity, setError]);
+  }, [activeCity, units, setError]);
 
   if (!forecast.length) {
     return null;
@@ -64,9 +65,9 @@ export const HourlyForecast = () => {
             >
               <p
                 className="text-3xl my-7 font-extrabold"
-                aria-label={`Temperature: ${temp?.toFixed(1)} degrees Celsius`}
+                aria-label={`Temperature: ${formatTemperature(temp!, units)} ${units} degrees`}
               >
-                {temp?.toFixed(1)} ºC
+                {formatTemperature(temp!, units)}
               </p>
               <p aria-label={`Time: ${time}`}>{time}</p>
             </Card>

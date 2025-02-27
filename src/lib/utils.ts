@@ -1,4 +1,4 @@
-import { City, Forecast, TempForecast } from './definitions/requests';
+import { City, Forecast, TempForecast, Units } from './definitions/requests';
 
 export const debounce = (callback: (value: string) => void, timeout = 400) => {
   let timer: NodeJS.Timeout;
@@ -126,5 +126,26 @@ export const removeActiveCityFromLocalStorage = (lat: number, lon: number) => {
     const parsedFavCities = JSON.parse(localStorageCities) as City[];
     const newFavCities = parsedFavCities.filter((city) => city.lat !== lat && city.lon !== lon);
     localStorage.setItem('fav-cities', JSON.stringify(newFavCities));
+  }
+};
+
+export const formatTemperature = (temp: number, units: keyof Units) => {
+  switch (units) {
+    case 'imperial':
+      return `${Math.round(temp)} °F`;
+    case 'standard':
+      return `${Math.round(temp)} K`;
+    default:
+      return `${Math.round(temp)} °C`;
+  }
+};
+
+export const handleKeyPress = <T extends HTMLElement>(
+  event: React.KeyboardEvent<T>,
+  callback: () => void
+) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    callback();
   }
 };
