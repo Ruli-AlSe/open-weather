@@ -80,7 +80,7 @@ La aplicación fue creada con el framework `Next.js` para hacer peticiones al AP
 │   ├── lib             // Funciones y utilidades
 │   │   ├── definitions // Tipos de datos
 │   ├── stores          // Funciones del gestor de estado global
-│   ├── hooks *         // Propuesta para hooks personalizados
+│   ├── hooks           // hooks personalizados
 │   ├── ...
 ```
 
@@ -90,7 +90,7 @@ Lista de cosas que me gustaría implementar pero no pude debido a tiempo.
 
 - ✅ Agregar elementos para accesibilidad en los componentes.
 - ✅ Agregar tests unitarios y de integración (Hice mucho testing manual para asegurar el buen funcionamiento, pero es una excelente practica para agregar tests automatizados y evitar el testing manual cuando la aplicación crece).
-- Funcionalidad para obtener información en diferentes sistemas métricos
+- ✅ Funcionalidad para obtener información en diferentes sistemas métricos
 - Funcionalidad para hacer una aplicación multi-idioma.
 - Mejoras en el UI para mostrar iconos relacionados al clima (soleado, nublado, tormenta eléctrica, etc).
 - Mejorar efectos y animaciones en CSS.
