@@ -1,42 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-import { TempForecast } from '@/lib/definitions/requests';
-import { getDailyTempForecast } from '@/actions/get-daily-temp-forecast';
 import { Subtitle } from './ui/subtitle';
 import { Card } from './ui/card';
-import { useErrorStore, useCityStore } from '@/stores';
 import { formatTemperature } from '@/lib/utils';
+import { useTempForecast } from '@/hooks';
 
 export const DailyTempForecast = () => {
-  const { activeCity, units } = useCityStore((state) => state);
-  const [forecast, setForecast] = useState<TempForecast[]>([]);
-  const setError = useErrorStore((state) => state.setError);
+  const { dailyForecast, activeCity, units } = useTempForecast();
 
-  useEffect(() => {
-    const getClimate = async () => {
-      if (!activeCity) {
-        return;
-      }
-
-      const { lat, lon } = activeCity;
-      try {
-        const res = await getDailyTempForecast(lat, lon, units);
-        setForecast(res);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError('Unknown error');
-        }
-      }
-    };
-
-    getClimate();
-  }, [activeCity, units, setError]);
-
-  if (!forecast.length) {
+  if (!dailyForecast.length) {
     return null;
   }
 
@@ -54,7 +26,7 @@ export const DailyTempForecast = () => {
         aria-label="Daily temperature forecast scrollable content"
         tabIndex={0}
       >
-        {forecast.map(({ dt_txt, temp_max, temp_min }) => (
+        {dailyForecast.map(({ dt_txt, temp_max, temp_min }) => (
           <Card key={dt_txt} title={dt_txt} aria-label={`Weather forecast for ${dt_txt}`}>
             <p
               className="text-3xl my-4 font-extrabold flex flex-col items-center"
