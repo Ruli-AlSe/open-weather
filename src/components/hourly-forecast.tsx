@@ -1,41 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-import { getHourlyForecast } from '@/actions/get-hourly-forecast';
-import { TempForecast } from '@/lib/definitions/requests';
 import { Subtitle } from './ui/subtitle';
 import { Card } from './ui/card';
-import { useErrorStore, useCityStore } from '@/stores';
+import { formatTemperature } from '@/lib/utils';
+import { useTempForecast } from '@/hooks';
 
 export const HourlyForecast = () => {
-  const activeCity = useCityStore((state) => state.activeCity);
-  const [forecast, setForecast] = useState<TempForecast[]>([]);
-  const setError = useErrorStore((state) => state.setError);
+  const { hourlyForecast, activeCity, units } = useTempForecast();
 
-  useEffect(() => {
-    const getClimate = async () => {
-      if (!activeCity) {
-        return;
-      }
-
-      const { lat, lon } = activeCity;
-      try {
-        const res = await getHourlyForecast(lat, lon);
-        setForecast(res);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError('Unknown error');
-        }
-      }
-    };
-
-    getClimate();
-  }, [activeCity, setError]);
-
-  if (!forecast.length) {
+  if (!hourlyForecast.length) {
     return null;
   }
 
@@ -53,7 +26,7 @@ export const HourlyForecast = () => {
         aria-label="Hourly temperature forecast scrollable content"
         tabIndex={0}
       >
-        {forecast.map(({ dt_txt, temp }) => {
+        {hourlyForecast.map(({ dt_txt, temp }) => {
           const [date, time] = dt_txt.split('-');
           return (
             <Card
@@ -64,9 +37,9 @@ export const HourlyForecast = () => {
             >
               <p
                 className="text-3xl my-7 font-extrabold"
-                aria-label={`Temperature: ${temp?.toFixed(1)} degrees Celsius`}
+                aria-label={`Temperature: ${formatTemperature(temp!, units)} ${units} degrees`}
               >
-                {temp?.toFixed(1)} ºC
+                {formatTemperature(temp!, units)}
               </p>
               <p aria-label={`Time: ${time}`}>{time}</p>
             </Card>

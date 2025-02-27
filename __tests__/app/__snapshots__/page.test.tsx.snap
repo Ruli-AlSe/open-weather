@@ -57,10 +57,78 @@ exports[`Main Page matches snapshot 1`] = `
                 aria-autocomplete="list"
                 aria-controls="city-list"
                 aria-label="Search for a city"
-                class="w-full p-2 md:p-3 text-xl rounded md:rounded-lg text-black"
+                class="w-full p-2 md:p-3 text-xl rounded md:rounded-lg text-black focus:outline-none focus:ring-2"
                 placeholder="Enter location"
                 type="text"
               />
+            </div>
+            <div
+              class="flex flex-col mt-4"
+            >
+              <h3
+                class="text-lg font-medium mb-2"
+                id="radio-group-title"
+              >
+                Select units of measurement:
+              </h3>
+              <div
+                aria-labelledby="radio-group-title"
+                class="w-full flex gap-5"
+                role="radiogroup"
+              >
+                <label
+                  aria-checked="true"
+                  class="flex items-center"
+                  role="radio"
+                >
+                  <input
+                    aria-label="Metric (ºC)"
+                    checked=""
+                    class="form-radio h-5 w-5 text-blue-600"
+                    name="radio"
+                    type="radio"
+                  />
+                  <span
+                    class="ml-2"
+                  >
+                    Metric (ºC)
+                  </span>
+                </label>
+                <label
+                  aria-checked="false"
+                  class="flex items-center"
+                  role="radio"
+                >
+                  <input
+                    aria-label="Imperial (ºF)"
+                    class="form-radio h-5 w-5 text-blue-600"
+                    name="radio"
+                    type="radio"
+                  />
+                  <span
+                    class="ml-2"
+                  >
+                    Imperial (ºF)
+                  </span>
+                </label>
+                <label
+                  aria-checked="false"
+                  class="flex items-center"
+                  role="radio"
+                >
+                  <input
+                    aria-label="Stardard (K)"
+                    class="form-radio h-5 w-5 text-blue-600"
+                    name="radio"
+                    type="radio"
+                  />
+                  <span
+                    class="ml-2"
+                  >
+                    Stardard (K)
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
         </section>

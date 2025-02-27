@@ -1,47 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { getCurrentClimate } from '@/actions/get-current-climate';
-import { Climate } from '@/lib/definitions/requests';
-import { useCityStore, useErrorStore } from '@/stores';
 import { Button } from './ui/button';
-import { saveActiveCityToLocalStorage } from '@/lib/utils';
+import { formatTemperature } from '@/lib/utils';
+import { useWeatherInfo } from '@/hooks';
 
 const paragraphClasses = 'text-xl mb-3';
 
 export const WeatherInfo = () => {
-  const activeCity = useCityStore((state) => state.activeCity);
-  const addFavCities = useCityStore((state) => state.addFavCities);
-  const favCities = useCityStore((state) => state.favCities);
-  const setError = useErrorStore((state) => state.setError);
-  const [climate, setClimate] = useState<Climate | undefined>();
-  const addCityToFav = () => {
-    saveActiveCityToLocalStorage(activeCity!);
-    addFavCities([activeCity!]);
-  };
-
-  useEffect(() => {
-    const getClimate = async () => {
-      if (!activeCity) {
-        setClimate(undefined);
-        return;
-      }
-
-      const { lat, lon } = activeCity;
-
-      try {
-        const res = await getCurrentClimate(lat, lon);
-        setClimate(res);
-      } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        setError(errorMessage);
-      }
-    };
-
-    getClimate();
-  }, [activeCity, setError]);
+  const { climate, favCities, activeCity, units, addCityToFav } = useWeatherInfo();
 
   if (!climate || !activeCity) {
     return null;
@@ -85,14 +53,15 @@ export const WeatherInfo = () => {
               height={45}
             />
             <span aria-live="polite">
-              Feels like {feels_like} ºC, with {weatherDescription}.
+              Feels like {formatTemperature(feels_like, units)}, with {weatherDescription}.
             </span>
           </div>
           <p className={paragraphClasses} aria-label="Current temperature" tabIndex={0}>
-            Temperature: {temp} ºC
+            Temperature: {formatTemperature(temp, units)}
           </p>
           <p className={paragraphClasses} aria-label="Temperature range" tabIndex={0}>
-            Max/Min temp: {temp_max} ºC / {temp_min} ºC
+            Max/Min temp: {formatTemperature(temp_max, units)} /{' '}
+            {formatTemperature(temp_min, units)}
           </p>
           <p className={paragraphClasses} aria-label="Humidity level" tabIndex={0}>
             Humidity: {humidity}%
@@ -110,8 +79,8 @@ export const WeatherInfo = () => {
             iconUrl="/fav-icon.svg"
             disabled={favCities.some(
               (city) =>
-                city.lat.toFixed(3) === coord.lat.toFixed(3) &&
-                city.lon.toFixed(3) === coord.lon.toFixed(3)
+                city.lat.toFixed(2) === coord.lat.toFixed(2) &&
+                city.lon.toFixed(2) === coord.lon.toFixed(2)
             )}
             action={addCityToFav}
             extraClasses="bg-gradient-to-r from-blue-500 to-blue-400 duration-300 hover:to-blue-600 text-xl rounded-lg font-bold px-5"

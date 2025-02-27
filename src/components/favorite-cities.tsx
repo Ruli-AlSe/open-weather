@@ -6,26 +6,14 @@ import { City } from '@/lib/definitions/requests';
 import { useCityStore } from '@/stores/use-city-store';
 import { Subtitle } from './ui/subtitle';
 import { Button } from './ui/button';
-import { removeActiveCityFromLocalStorage } from '@/lib/utils';
+import { handleKeyPress, removeActiveCityFromLocalStorage } from '@/lib/utils';
 
 export const FavoriteCities = () => {
-  const favCities = useCityStore((state) => state.favCities);
-  const addFavCities = useCityStore((state) => state.addFavCities);
-  const removeFavCity = useCityStore((state) => state.removeFavCity);
-  const setActiveCity = useCityStore((state) => state.setActiveCity);
+  const { favCities, addFavCities, removeFavCity, setActiveCity } = useCityStore((state) => state);
   const removeCity = (lat: number, lon: number) => {
     removeActiveCityFromLocalStorage(lat, lon);
 
     removeFavCity(lat, lon);
-  };
-  const handleKeypress = (
-    e: React.KeyboardEvent<HTMLDivElement>,
-    cityInfo: { lat: number; lon: number; name: string; country: string; state: string }
-  ) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      setActiveCity(cityInfo);
-    }
   };
 
   useEffect(() => {
@@ -62,7 +50,9 @@ export const FavoriteCities = () => {
                 className="mb-5 hover:cursor-pointer hover:underline"
                 onClick={() => setActiveCity({ lat, lon, name, country, state })}
                 role="button"
-                onKeyDown={(e) => handleKeypress(e, { lat, lon, name, country, state })}
+                onKeyDown={(event) =>
+                  handleKeyPress(event, () => setActiveCity({ lat, lon, name, country, state }))
+                }
                 tabIndex={0}
                 aria-label={`View weather for ${name}, ${state}, ${country}`}
               >
