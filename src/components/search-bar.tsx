@@ -6,6 +6,7 @@ import { Units } from '@/lib/definitions/requests';
 import { Subtitle } from './ui/subtitle';
 import { RadioButtons } from './ui/radio-buttons';
 import { useSearchBar } from '@/hooks';
+import { useTranslations } from 'next-intl';
 
 export const SearchBar = () => {
   const {
@@ -18,6 +19,7 @@ export const SearchBar = () => {
     handleKeyDown,
     processLocationChange,
   } = useSearchBar();
+  const t = useTranslations('SearchBar');
 
   return (
     <section
@@ -26,7 +28,7 @@ export const SearchBar = () => {
       aria-label="City search"
     >
       <div className="w-full relative">
-        <Subtitle text="Search for any city in the world and click on it" />
+        <Subtitle text={t('subtitle')} />
 
         <div
           role="combobox"
