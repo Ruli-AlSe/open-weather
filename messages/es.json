@@ -1,5 +1,79 @@
 {
+  "LocaleSwitcher": {
+    "en": "Ingles",
+    "es": "Español",
+    "zh": "Chino",
+    "label": "Cambiar idioma"
+  },
   "SearchBar": {
-    "subtitle": "Busca cualquier ciudad del mundo y haz click en ella"
+    "subtitle": "Busca cualquier ciudad y haz click en ella",
+    "placeholder": "Buscar ciudad",
+    "noResults": "Sin resultados para \" {query} \".",
+    "radioButtonsLabel": "Unidades de media:",
+    "radioButtonOptions": {
+      "metric": "Métrico (ºC)",
+      "imperial": "Ingles (ºF)",
+      "standard": "Estándar (ºK)"
+    },
+    "aria": {
+      "sectionTitle": "Buscador de ciudades",
+      "searchInput": "Buscar ciudad",
+      "searchResults": "Resultados de búsqueda"
+    }
+  },
+  "DailyTempForecast": {
+    "subtitle": "Pronóstico de temperatura max/min diaria para la semana",
+    "maxTemp": "Temp. max.",
+    "minTemp": "Temp. mkn.",
+    "aria": {
+      "sectionTitle": "Pronóstico diario para {city}, {country}",
+      "sectionScrollTitle": "Contenido extendido para pronóstico diario",
+      "forecastCardTitle": "Clima pronósticado para {date}",
+      "forecastCardMaxTemp": "Temperatura máxima: {temp} unidades {units}",
+      "forecastCardMinTemp": "Temperatura mínima: {temp} unidades {units}"
+    }
+  },
+  "FavoriteCities": {
+    "subtitle": "Ciudades favoritas",
+    "emptyList": "No hay ciudades favoritas",
+    "buttonRemove": "Quitar de favoritos",
+    "aria": {
+      "sectionTitle": "Lista de ciudades favoritas",
+      "sectionScrollTitle": "Contenido extendido para ciudades favoritas",
+      "favoriteCityTitle": "Ciudad favorita: {city}, {country}",
+      "displayInfoFor": "Ver clima para {city}, {state}, {country}",
+      "removeFavoriteCity": "Quitar {city}, {state}, {country} de favoritos"
+    }
+  },
+  "HourlyTempForecast": {
+    "subtitle": "Pronóstico de temperatura por hora",
+    "temperature": "Temperatura: {temp} {units}",
+    "aria": {
+      "sectionTitle": "Pronóstico por hora para {city}, {country}",
+      "sectionScrollTitle": "Contenido extendido para pronóstico por hora",
+      "forecastCardTitle": "Pronóstico para {date} a las {hour}",
+      "forecastCardTemp": "Temperatura: {temp} en  unidades {units}",
+      "forecastTime": "Hora: {hour}"
+    }
+  },
+  "WeatherInfo": {
+    "subtitle": "Clima para ",
+    "feelsLike": "Sensacion: {feelsLike} con {conditions}",
+    "temperature": "Temperatura: {temp}",
+    "minMaxTemp": "Min/Max temp.: {maxTemp} / {minTemp}",
+    "humidity": "Humedad: {humidity}%",
+    "addToFav": "Agregar a fav",
+    "seeMore": "Ver mas",
+    "aria": {
+      "sectionTitle": "Clima actual para {city}, {country}",
+      "weatherDetails": "Detalles del clima",
+      "mainContent": "Condiciones actuales del clima",
+      "currentTemp": "Temperatura actual",
+      "tempRange": "Rango de temperatura",
+      "humidity": "Humedad",
+      "weatherActions": "Acciones",
+      "addFavorite": "Añadir {city}, {country} a favoritos",
+      "seeMore": "Ver mas detalles del clima en OpenWeatherMap para {city}, {country}"
+    }
   }
 }

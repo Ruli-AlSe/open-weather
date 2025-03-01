@@ -1,5 +1,79 @@
 {
+  "LocaleSwitcher": {
+    "en": "English",
+    "es": "Español",
+    "zh": "Chinese",
+    "label": "Language"
+  },
   "SearchBar": {
-    "subtitle": "Search for any city in the world and click on it"
+    "subtitle": "Search for any city in the world and click on it",
+    "placeholder": "Search for a city",
+    "noResults": "No results found for \" {query} \".",
+    "radioButtonsLabel": "Select units of measurement:",
+    "radioButtonOptions": {
+      "metric": "Metric (ºC)",
+      "imperial": "Imperial (ºF)",
+      "standard": "Standard (ºK)"
+    },
+    "aria": {
+      "sectionTitle": "City searcher",
+      "searchInput": "Search for a city",
+      "searchResults": "Search results"
+    }
+  },
+  "DailyTempForecast": {
+    "subtitle": "Forecast max/min temp for the rest of the week",
+    "maxTemp": "Max temp.",
+    "minTemp": "Min temp.",
+    "aria": {
+      "sectionTitle": "Daily temperature forecast for {city}, {country}",
+      "sectionScrollTitle": "Daily temperature forecast scrollable content",
+      "forecastCardTitle": "Weather forecast for {date}",
+      "forecastCardMaxTemp": "Maximum temperature: {temp} {units} degrees",
+      "forecastCardMinTemp": "Minimum temperature: {temp} {units} degrees"
+    }
+  },
+  "FavoriteCities": {
+    "subtitle": "Favorite cities",
+    "emptyList": "No favorite cities added yet.",
+    "buttonRemove": "Remove",
+    "aria": {
+      "sectionTitle": "List of favorite cities",
+      "sectionScrollTitle": "Favorite cities scrollable content",
+      "favoriteCityTitle": "Favorite city: {city}, {country}",
+      "displayInfoFor": "View weather for {city}, {state}, {country}",
+      "removeFavoriteCity": "Remove {city}, {state}, {country} from favorites"
+    }
+  },
+  "HourlyTempForecast": {
+    "subtitle": "Forecast for the next 24 hours",
+    "temperature": "Temperature: {temp} {units} degrees",
+    "aria": {
+      "sectionTitle": "Hourly weather forecast for {city}, {country}",
+      "sectionScrollTitle": "Hourly temperature forecast scrollable content",
+      "forecastCardTitle": "Weather forecast for {date} at {hour}",
+      "forecastCardTemp": "Temperature: {temp} {units} degrees",
+      "forecastTime": "Time: {hour}"
+    }
+  },
+  "WeatherInfo": {
+    "subtitle": "Weather info for ",
+    "feelsLike": "Feels like: {feelsLike} with {conditions}",
+    "temperature": "Temperature: {temp}",
+    "minMaxTemp": "Min/Max temp.: {maxTemp} / {minTemp}",
+    "humidity": "Humidity: {humidity}%",
+    "addToFav": "Add to fav",
+    "seeMore": "See more info",
+    "aria": {
+      "sectionTitle": "Current weather for {city}, {country}",
+      "weatherDetails": "Weather details",
+      "mainContent": "Current weather conditions",
+      "currentTemp": "Current temperature",
+      "tempRange": "Temperature range",
+      "humidity": "Humidity level",
+      "weatherActions": "Weather actions",
+      "addFavorite": "Add {city}, {country} to favorites",
+      "seeMore": "View detailed weather information for {city}, {country} on OpenWeatherMap"
+    }
   }
 }

@@ -25,7 +25,7 @@ export const SearchBar = () => {
     <section
       id="search-bar-section"
       className="md:px-3 mt-10 flex justify-center gap-3"
-      aria-label="City search"
+      aria-label={t('aria.sectionTitle')}
     >
       <div className="w-full relative">
         <Subtitle text={t('subtitle')} />
@@ -45,26 +45,26 @@ export const SearchBar = () => {
               }
             )}
             type="text"
-            placeholder="Enter location"
+            placeholder={t('placeholder')}
             onChange={(e) => processLocationChange(e.target.value)}
             onKeyDown={handleKeyDown}
-            aria-label="Search for a city"
+            aria-label={t('aria.searchInput')}
             aria-autocomplete="list"
             aria-controls="city-list"
             aria-activedescendant={activeIndex >= 0 ? `city-option-${activeIndex}` : undefined}
           />
           {cities?.length === 0 && (
             <p role="alert" data-testid="search-error-message" className="p-4 text-red-500">
-              No results found for &quot; {location} &quot;
+              {t('noResults', { query: location })}
             </p>
           )}
         </div>
         <RadioButtons
-          title="Select units of measurement:"
+          title={t('radioButtonsLabel')}
           options={[
-            { label: 'Metric (ºC)', value: 'metric' },
-            { label: 'Imperial (ºF)', value: 'imperial' },
-            { label: 'Stardard (K)', value: 'standard' },
+            { label: t('radioButtonOptions.metric'), value: 'metric' },
+            { label: t('radioButtonOptions.imperial'), value: 'imperial' },
+            { label: t('radioButtonOptions.standard'), value: 'standard' },
           ]}
           changeValue={(value) => setUnits(value as keyof Units)}
           defaultValue={units}
@@ -75,7 +75,7 @@ export const SearchBar = () => {
             id="city-list"
             role="listbox"
             className="absolute z-10 w-full max-h-96 overflow-y-auto bg-white md:rounded-lg shadow-md top-[105%] md:top-[150px] lg:top-[120px]"
-            aria-label="Search results"
+            aria-label={t('aria.searchResults')}
           >
             {cities.map((city, idx) => (
               <div
