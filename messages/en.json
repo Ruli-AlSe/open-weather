@@ -75,5 +75,12 @@
       "addFavorite": "Add {city}, {country} to favorites",
       "seeMore": "View detailed weather information for {city}, {country} on OpenWeatherMap"
     }
+  },
+  "ActionErrors": {
+    "missingApiKey": "API URL or API key is missing",
+    "getCurrentClimateError": "'Failed to fetch current weather information",
+    "getDailyTempForecastError": "Failed to fetch daily temperature information",
+    "getHourlyForecastError": "Failed to fetch hourly forecast information",
+    "searchCityLocationError": "Failed to search for city name"
   }
 }
