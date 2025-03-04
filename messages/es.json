@@ -75,5 +75,12 @@
       "addFavorite": "Añadir {city}, {country} a favoritos",
       "seeMore": "Ver mas detalles del clima en OpenWeatherMap para {city}, {country}"
     }
+  },
+  "ActionErrors": {
+    "missingApiKey": "API URL o API key no especificada",
+    "getCurrentClimateError": "'No se pudo obtener la información del clima actual'",
+    "getDailyTempForecastError": "No se pudo obtener el pronóstico de temperatura diaria",
+    "getHourlyForecastError": "No se pudo obtener el pronóstico por hora",
+    "searchCityLocationError": "No se pudo encontrar la ubicación de la ciudad"
   }
 }

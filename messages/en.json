@@ -78,7 +78,7 @@
   },
   "ActionErrors": {
     "missingApiKey": "API URL or API key is missing",
-    "getCurrentClimateError": "'Failed to fetch current weather information",
+    "getCurrentClimateError": "Failed to fetch current weather information",
     "getDailyTempForecastError": "Failed to fetch daily temperature information",
     "getHourlyForecastError": "Failed to fetch hourly forecast information",
     "searchCityLocationError": "Failed to search for city name"

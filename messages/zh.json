@@ -75,5 +75,12 @@
       "addFavorite": "添加到收藏夹 {city}, {country}",
       "seeMore": "查看详细天气信息 {city}, {country} 在 OpenWeatherMap 上"
     }
+  },
+  "ActionErrors": {
+    "missingApiKey": "缺少 API URL 或 API 密钥",
+    "getCurrentClimateError": "无法获取当前天气信息",
+    "getDailyTempForecastError": "无法获取每日温度信息",
+    "getHourlyForecastError": "无法获取每小时预报信息",
+    "searchCityLocationError": "无法搜索城市名称"
   }
 }
