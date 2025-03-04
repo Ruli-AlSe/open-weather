@@ -1,0 +1,86 @@
+{
+  "LocaleSwitcher": {
+    "en": "英语",
+    "es": "西班牙语",
+    "zh": "中文",
+    "label": "语言"
+  },
+  "SearchBar": {
+    "subtitle": "搜索世界上任何一个城市并点击它",
+    "placeholder": "搜索城市",
+    "noResults": "未找到结果 \" {query} \".",
+    "radioButtonsLabel": "选择测量单位：",
+    "radioButtonOptions": {
+      "metric": "度量衡系统 (ºC)",
+      "imperial": "英语系统 (ºF)",
+      "standard": "标准 (ºK)"
+    },
+    "aria": {
+      "sectionTitle": "城市搜索器",
+      "searchInput": "搜索城市",
+      "searchResults": "搜索结果"
+    }
+  },
+  "DailyTempForecast": {
+    "subtitle": "本周剩余时间最高/最低气温预测",
+    "maxTemp": "最高温度",
+    "minTemp": "最低温度",
+    "aria": {
+      "sectionTitle": "每日气温预报 {city}, {country}",
+      "sectionScrollTitle": "每日气温预报可滚动内容",
+      "forecastCardTitle": "的天气预报 {date}",
+      "forecastCardMaxTemp": "最高温度: {temp} {units} 度",
+      "forecastCardMinTemp": "最低气温: {temp} {units} 度"
+    }
+  },
+  "FavoriteCities": {
+    "subtitle": "最喜欢的城市",
+    "emptyList": "尚未添加喜爱的城市。",
+    "buttonRemove": "消除",
+    "aria": {
+      "sectionTitle": "最喜爱的城市列表",
+      "sectionScrollTitle": "喜爱的城市可滚动内容",
+      "favoriteCityTitle": "最喜爱的城市: {city}, {country}",
+      "displayInfoFor": "查看天气 {city}, {state}, {country}",
+      "removeFavoriteCity": "消除 {city}, {state}, {country} 从收藏夹中删"
+    }
+  },
+  "HourlyTempForecast": {
+    "subtitle": "未来 24 小时的天气预报",
+    "temperature": "温度 {temp} {units} degrees",
+    "aria": {
+      "sectionTitle": "每小时天气预报 {city}, {country}",
+      "sectionScrollTitle": "每小时气温预报可滚动内容",
+      "forecastCardTitle": "天气预报 {date} at {hour}",
+      "forecastCardTemp": "温度: {temp} {units} degrees",
+      "forecastTime": "时间 {hour}"
+    }
+  },
+  "WeatherInfo": {
+    "subtitle": "天气信息 ",
+    "feelsLike": "感觉像: {feelsLike} 和 {conditions}",
+    "temperature": "温度: {temp}",
+    "minMaxTemp": "最低/最高温度。: {maxTemp} / {minTemp}",
+    "humidity": "湿度: {humidity}%",
+    "addToFav": "添加到收藏夹",
+    "seeMore": "查看更多信息",
+    "aria": {
+      "sectionTitle": "当前天气 {city}, {country}",
+      "weatherDetails": "天气详情",
+      "mainContent": "当前天气状况",
+      "currentTemp": "当前温度",
+      "tempRange": "温度范围",
+      "humidity": "湿度",
+      "weatherActions": "天气行动",
+      "addFavorite": "添加到收藏夹 {city}, {country}",
+      "seeMore": "查看详细天气信息 {city}, {country} 在 OpenWeatherMap 上"
+    }
+  },
+  "ActionErrors": {
+    "missingApiKey": "缺少 API URL 或 API 密钥",
+    "getCurrentClimateError": "无法获取当前天气信息",
+    "getDailyTempForecastError": "无法获取每日温度信息",
+    "getHourlyForecastError": "无法获取每小时预报信息",
+    "searchCityLocationError": "无法搜索城市名称"
+  }
+}

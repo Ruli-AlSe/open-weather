@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { Button } from './ui/button';
 import { formatTemperature } from '@/lib/utils';
@@ -10,6 +11,7 @@ const paragraphClasses = 'text-xl mb-3';
 
 export const WeatherInfo = () => {
   const { climate, favCities, activeCity, units, addCityToFav } = useWeatherInfo();
+  const t = useTranslations('WeatherInfo');
 
   if (!climate || !activeCity) {
     return null;
@@ -28,12 +30,12 @@ export const WeatherInfo = () => {
     <section
       id="weather-info-section"
       className="px-5 fade-in-component"
-      aria-label={`Current weather information for ${name}, ${country}`}
+      aria-label={t('aria.sectionTitle', { city: name, country })}
     >
-      <div className="container flex flex-col" role="region" aria-label="Weather details">
+      <div className="container flex flex-col" role="region" aria-label={t('aria.weatherDetails')}>
         <div className="w-full">
           <h1 className="text-3xl mb-3" tabIndex={0}>
-            Weather info for{' '}
+            {t('subtitle')}
             <span
               className="bg-gradient-to-r from-orange-600 to-orange-300 text-transparent bg-clip-text font-extrabold"
               aria-label={`${name}, ${country}`}
@@ -44,7 +46,7 @@ export const WeatherInfo = () => {
 
           <div
             className={`${paragraphClasses} flex items-center`}
-            aria-label="Current weather conditions"
+            aria-label={t('aria.mainContent')}
           >
             <Image
               src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
@@ -53,28 +55,35 @@ export const WeatherInfo = () => {
               height={45}
             />
             <span aria-live="polite">
-              Feels like {formatTemperature(feels_like, units)}, with {weatherDescription}.
+              {t('feelsLike', {
+                feelsLike: formatTemperature(feels_like, units),
+                conditions: weatherDescription,
+              })}
+              .
             </span>
           </div>
-          <p className={paragraphClasses} aria-label="Current temperature" tabIndex={0}>
-            Temperature: {formatTemperature(temp, units)}
+          <p className={paragraphClasses} aria-label={t('aria.currentTemp')} tabIndex={0}>
+            {t('temperature', { temp: formatTemperature(temp, units) })} $
+            {formatTemperature(temp, units)}
           </p>
-          <p className={paragraphClasses} aria-label="Temperature range" tabIndex={0}>
-            Max/Min temp: {formatTemperature(temp_max, units)} /{' '}
-            {formatTemperature(temp_min, units)}
+          <p className={paragraphClasses} aria-label={t('aria.tempRange')} tabIndex={0}>
+            {t('minMaxTemp', {
+              maxTemp: formatTemperature(temp_max, units),
+              minTemp: formatTemperature(temp_min, units),
+            })}
           </p>
-          <p className={paragraphClasses} aria-label="Humidity level" tabIndex={0}>
-            Humidity: {humidity}%
+          <p className={paragraphClasses} aria-label={t('aria.humidity')} tabIndex={0}>
+            {t('humidity', { humidity })}
           </p>
         </div>
 
         <div
           className="flex flex-col lg:flex-row justify-between gap-5 mt-5"
           role="group"
-          aria-label="Weather actions"
+          aria-label={t('aria.weatherActions')}
         >
           <Button
-            text="Fav city"
+            text={t('addToFav')}
             buttonType="button"
             iconUrl="/fav-icon.svg"
             disabled={favCities.some(
@@ -84,15 +93,15 @@ export const WeatherInfo = () => {
             )}
             action={addCityToFav}
             extraClasses="bg-gradient-to-r from-blue-500 to-blue-400 duration-300 hover:to-blue-600 text-xl rounded-lg font-bold px-5"
-            aria-label={`Add ${name}, ${country} to favorites`}
+            aria-label={t('aria.addFavorite', { city: name, country })}
           />
           <Button
-            text="See more info"
+            text={t('seeMore')}
             buttonType="external-link"
             iconUrl="/external-link.svg"
             href={`https://openweathermap.org/city/${id}`}
             extraClasses="bg-gradient-to-r from-orange-500 to-orange-300 duration-300 hover:to-orange-600 text-xl rounded-lg font-bold"
-            aria-label={`View detailed weather information for ${name}, ${country} on OpenWeatherMap`}
+            aria-label={t('aria.seeMore', { city: name, country })}
           />
         </div>
       </div>

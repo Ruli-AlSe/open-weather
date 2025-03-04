@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { City } from '@/lib/definitions/requests';
 import { useCityStore } from '@/stores/use-city-store';
@@ -10,6 +11,7 @@ import { handleKeyPress, removeActiveCityFromLocalStorage } from '@/lib/utils';
 
 export const FavoriteCities = () => {
   const { favCities, addFavCities, removeFavCity, setActiveCity } = useCityStore((state) => state);
+  const t = useTranslations('FavoriteCities');
   const removeCity = (lat: number, lon: number) => {
     removeActiveCityFromLocalStorage(lat, lon);
 
@@ -26,16 +28,16 @@ export const FavoriteCities = () => {
   }, [addFavCities]);
 
   return (
-    <section className="px-5" aria-label="Favorite cities list" role="region">
-      <Subtitle text="Favorite Cities" />
+    <section className="px-5" aria-label={t('subtitle')} role="region">
+      <Subtitle text={t('subtitle')} />
 
       <div
         id="favorite-cities"
         className="px-1 grid grid-cols-1 gap-4 text-white max-h-60 md:max-h-[26rem] overflow-y-scroll"
         role="list"
-        aria-label="List of favorite cities"
+        aria-label={t('subtitle')}
       >
-        {!favCities.length && <p role="alert">No favorite cities added yet.</p>}
+        {!favCities.length && <p role="alert">{t('emptyList')}</p>}
         {favCities.map(({ lat, lon, name, country, state }, idx) => {
           return (
             <div
@@ -54,19 +56,23 @@ export const FavoriteCities = () => {
                   handleKeyPress(event, () => setActiveCity({ lat, lon, name, country, state }))
                 }
                 tabIndex={0}
-                aria-label={`View weather for ${name}, ${state}, ${country}`}
+                aria-label={t('aria.displayInfoFor', {
+                  city: name,
+                  state,
+                  country,
+                })}
               >
                 <h3 className="text-xl font-bold">{name}</h3>
                 <p className="text-gray-200">{`${state}, ${country}`}</p>
               </div>
 
               <Button
-                text="Remove fav"
+                text={t('buttonRemove')}
                 buttonType="button"
                 action={() => removeCity(lat, lon)}
                 extraClasses="w-fit bg-red-500 duration-300 hover:bg-red-700 text-sm rounded-lg font-bold"
                 testId={`remove-fav-city-${name}-${state}-${country}`}
-                aria-label={`Remove ${name}, ${state}, ${country} from favorites`}
+                aria-label={t('aria.removeFavoriteCity', { city: name, state, country })}
               />
             </div>
           );

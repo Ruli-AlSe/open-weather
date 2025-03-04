@@ -1,5 +1,7 @@
 'use server';
 
+import { getTranslations } from 'next-intl/server';
+
 import { Climate, Units } from '@/lib/definitions/requests';
 
 export const getCurrentClimate = async (
@@ -9,10 +11,11 @@ export const getCurrentClimate = async (
 ) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;
   const apiKey = process.env.WEATHERAPP_API_KEY;
+  const t = await getTranslations('ActionErrors');
 
   try {
     if (!apiUrl || !apiKey) {
-      throw new Error('API URL or API key is missing');
+      throw new Error(t('missingApiKey'));
     }
 
     const response = await fetch(
@@ -23,6 +26,6 @@ export const getCurrentClimate = async (
     return data;
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to fetch current weather information');
+    throw new Error(t('getCurrentClimateError'));
   }
 };

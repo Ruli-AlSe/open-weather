@@ -70,17 +70,18 @@ La aplicación fue creada con el framework `Next.js` para hacer peticiones al AP
 │   ├── components
 │   ├── ...
 ├── public              // Todos los assets estáticos
-├── src                 // código fuente
+├── src                 // Código fuente
 │   ├── actions         // Funciones de servidor para hacer consultas al API de OpenWeatherMap
 │   ├── app             // Layouts, Paginas y rutas de la aplicación
 │   ├── components      // Componentes utilizados en las páginas
 │   │   ├── ui          // Componentes atómicos
 │   │   ├── auth *      // Esta carpeta no existe pero pudieran almacenarse componentes relacionados con la autenticación y seguir este enfoque para cada ruta
 │   │   ├── home *
+│   ├── hooks           // Hooks personalizados
+│   ├── i18n            // Configuración de internacionalización
 │   ├── lib             // Funciones y utilidades
 │   │   ├── definitions // Tipos de datos
 │   ├── stores          // Funciones del gestor de estado global
-│   ├── hooks           // hooks personalizados
 │   ├── ...
 ```
 
@@ -89,8 +90,8 @@ La aplicación fue creada con el framework `Next.js` para hacer peticiones al AP
 Lista de cosas que me gustaría implementar pero no pude debido a tiempo.
 
 - ✅ Agregar elementos para accesibilidad en los componentes.
-- ✅ Agregar tests unitarios y de integración (Hice mucho testing manual para asegurar el buen funcionamiento, pero es una excelente practica para agregar tests automatizados y evitar el testing manual cuando la aplicación crece).
+- ⚠️ Agregar tests unitarios y de integración.
 - ✅ Funcionalidad para obtener información en diferentes sistemas métricos
-- Funcionalidad para hacer una aplicación multi-idioma.
+- ✅ Funcionalidad para hacer una aplicación multi-idioma.
 - Mejoras en el UI para mostrar iconos relacionados al clima (soleado, nublado, tormenta eléctrica, etc).
 - Mejorar efectos y animaciones en CSS.

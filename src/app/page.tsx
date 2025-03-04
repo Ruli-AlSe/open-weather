@@ -5,6 +5,7 @@ import {
   DailyTempForecast,
   HourlyForecast,
 } from '@/components';
+import { LocaleSwitcher } from '@/components/locale-switcher';
 
 export default async function Home() {
   return (
@@ -23,21 +24,24 @@ export default async function Home() {
         </span>
       </h1>
 
-      <section
-        className="flex flex-col-reverse md:grid md:grid-cols-3"
-        role="region"
-        aria-label="Main weather information"
-      >
-        <div className="col-span-2 flex flex-col">
-          <SearchBar />
-          <WeatherInfo />
+      <section className="flex flex-col gap-4">
+        <LocaleSwitcher />
+        <div
+          className="flex flex-col-reverse md:grid md:grid-cols-3"
+          role="region"
+          aria-label="Main weather information"
+        >
+          <div className="col-span-2 flex flex-col">
+            <SearchBar />
+            <WeatherInfo />
+          </div>
+          <FavoriteCities />
         </div>
-        <FavoriteCities />
-      </section>
 
-      <section role="region" aria-label="Detailed weather forecasts">
-        <HourlyForecast />
-        <DailyTempForecast />
+        <section role="region" aria-label="Detailed weather forecasts">
+          <HourlyForecast />
+          <DailyTempForecast />
+        </section>
       </section>
     </main>
   );

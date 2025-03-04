@@ -1,5 +1,7 @@
 'use server';
 
+import { getTranslations } from 'next-intl/server';
+
 import { apiDateFormat, convert3hrForecastToHourlyForecast } from '@/lib/utils';
 import { getCurrentClimate } from './get-current-climate';
 import { Units } from '@/lib/definitions/requests';
@@ -11,10 +13,11 @@ export const getHourlyForecast = async (
 ) => {
   const apiUrl = process.env.WEATHERAPP_API_URL;
   const apiKey = process.env.WEATHERAPP_API_KEY;
+  const t = await getTranslations('ActionErrors');
 
   try {
     if (!apiUrl || !apiKey) {
-      throw new Error('API URL or API key is missing');
+      throw new Error(t('missingApiKey'));
     }
     const [forecastRes, currentWeatherRes] = await Promise.all([
       fetch(
@@ -32,6 +35,6 @@ export const getHourlyForecast = async (
     return hourlyForecast;
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to fetch hourly forecast information');
+    throw new Error(t('getHourlyForecastError'));
   }
 };
